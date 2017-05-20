@@ -4,28 +4,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import com.iQueue.model.Office;
 
 public class OfficeDao implements OfficeDaoImp {
 	
 	private JdbcTemplate jdbcTemplate;
+	private DataSource dataSource;
 	
 	/*
 	 * 通过RowMapper赋值给office
 	 * RowMapper可以将数据中的每一行封装成用户定义的类
 	 * 在数据库查询中，如果返回的类型是用户自定义的类型则需要包装
 	 */
-	private static final class OfficeMapper implements RowMapper {
-		public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+	private static final class OfficeMapper implements RowMapper<Office> {
+		public Office mapRow(ResultSet rs, int rowNum) throws SQLException {
 			// 缺少医生信息和队列信息
 			Office office = new Office();
-			office.setOId(rs.getString("id"));
+			office.setOId(rs.getString("o_id"));
 			office.setName(rs.getString("name"));
+			office.setFirTreatId(rs.getString("firTreatId"));
+			office.setTwiTreatId(rs.getString("twiTreatId"));
+			office.setTriTreatId(rs.getString("triTreatId"));
 			return office;
 		}
+	}
+	
+	
+	public Office getOffice(String officeId) {
+		String SQL = "select * from office where o_id = ?";
+		List<Office> items = jdbcTemplate.query(SQL, new Object[] { officeId }, new OfficeMapper());
+		if (items.isEmpty()) {
+			return null;
+		}
+		return items.get(0);
 	}
 	
 	/*
@@ -79,6 +96,11 @@ public class OfficeDao implements OfficeDaoImp {
 		jdbcTemplate.update(sql,
 				office.getName(),
 				office.getOfficeId());
+	}
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

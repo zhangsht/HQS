@@ -62,7 +62,7 @@ public class UserDao implements UserDaoImp {
 		return user;
 	}
 	
-	public boolean isExit(String userName) {
+	public boolean isEmpty(String userName) {
 		String SQL = "select * from user where username = ?";
 		List items = jdbcTemplate.query(SQL, new Object[] { userName }, new UserMapper());
 		return items.isEmpty();
@@ -101,7 +101,6 @@ public class UserDao implements UserDaoImp {
 		return null;
 	}
 	
-	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -114,6 +113,5 @@ public class UserDao implements UserDaoImp {
 	public JdbcTemplate getJbdcTemplate() {
 		return jdbcTemplate;
 	}
-
 	
 }

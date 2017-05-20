@@ -1,14 +1,21 @@
 package com.iQueue.model;
 
 public class Clinic {
-	private String cid;
+	private String cId;
 	private String name;
-	private String doctorIds;
-	public String getCid() {
-		return cid;
+	private String oId;
+	
+	public String getoId() {
+		return oId;
 	}
-	public void setCid(String cid) {
-		this.cid = cid;
+	public void setoId(String oId) {
+		this.oId = oId;
+	}
+	public String getCId() {
+		return cId;
+	}
+	public void setCId(String cid) {
+		this.cId = cid;
 	}
 	public String getName() {
 		return name;
@@ -16,11 +23,6 @@ public class Clinic {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDoctorIds() {
-		return doctorIds;
-	}
-	public void setDoctorIds(String doctorIds) {
-		this.doctorIds = doctorIds;
-	}
+	
 	
 }

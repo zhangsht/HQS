@@ -3,46 +3,34 @@ package com.iQueue.model;
 import java.util.List;
 
 import com.iQueue.model.DoctorInfo;
-import com.iQueue.model.QueueInfo;
 
 public class Office {
-	private String oId;  // ’Ô “ID
-	private String name;	//’Ô “√˚◊÷
-	private String clinicsNames;
+	private String oId;
+	private String name;
+	private String firTreatId;
+	private String twiTreatId;
+	private String triTreatId;
 	
-	public String getoId() {
-		return oId;
+	public String getFirTreatId() {
+		return firTreatId;
 	}
-	public void setoId(String oId) {
-		this.oId = oId;
+	public void setFirTreatId(String firTreatId) {
+		this.firTreatId = firTreatId;
 	}
-	public String getClinicsNames() {
-		return clinicsNames;
+	
+	public String getTwiTreatId() {
+		return twiTreatId;
 	}
-	public void setClinicsNames(String clinicsNames) {
-		this.clinicsNames = clinicsNames;
+	public void setTwiTreatId(String twiTreatId) {
+		this.twiTreatId = twiTreatId;
 	}
-	public String getFirTreats() {
-		return firTreats;
+	
+	public String getTriTreatId() {
+		return triTreatId;
 	}
-	public void setFirTreats(String firTreats) {
-		this.firTreats = firTreats;
+	public void setTriTreatId(String triTreatId) {
+		this.triTreatId = triTreatId;
 	}
-	public String getTwiTreats() {
-		return twiTreats;
-	}
-	public void setTwiTreats(String twiTreats) {
-		this.twiTreats = twiTreats;
-	}
-	public String getTriTreats() {
-		return triTreats;
-	}
-	public void setTriTreats(String triTreats) {
-		this.triTreats = triTreats;
-	}
-	private String firTreats;
-	private String twiTreats;
-	private String triTreats;
 	
 	public void setOId(String Id) {
 		this.oId = Id;

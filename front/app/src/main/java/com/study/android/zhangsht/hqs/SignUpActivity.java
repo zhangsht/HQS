@@ -2,13 +2,13 @@ package com.study.android.zhangsht.hqs;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.os.Handler;
+import android.os.Message;
 
 import org.json.JSONObject;
 
@@ -21,18 +21,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText rConfirmPwd;
 
     private MyHandler handler;
-
-    private String parseItemJSONWithJSONObject(String jsonData) {
-        String status = null;
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            status = jsonObject.getString("status");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return status == null ? "" : status;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,17 +85,35 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             switch (msg.what) {
                 case 1:
                     String response = (String) msg.obj;
-                    String status = parseItemJSONWithJSONObject(response);
-                    if (status.equals("success")) {
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        intent.putExtra("status", "register");
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(SignUpActivity.this, status, Toast.LENGTH_SHORT).show();
-                    }
+                    StartActivityWithData(response);
                     break;
             }
         }
     }
+
+    private void StartActivityWithData(final String response) {
+        String status = "";
+        String officeId = "";
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
+            status = jsonObject.getString("status");
+            officeId = jsonObject.getString("oid");
+        } catch (Exception e) {
+            Toast.makeText(SignUpActivity.this, "响应解析失败", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+        if (status.equals("success")) {
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            intent.putExtra("status", "register");
+            intent.putExtra("officeId", officeId);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(SignUpActivity.this, status, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

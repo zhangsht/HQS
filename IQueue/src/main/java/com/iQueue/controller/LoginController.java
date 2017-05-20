@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PrimitiveIterator.OfInt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,37 +16,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iQueue.dao.OfficeDao;
 import com.iQueue.dao.UserDao;
 import com.iQueue.model.Status;
 import com.iQueue.model.User;
+import com.iQueue.model.Clinic;
 import com.iQueue.model.Office;
+import com.iQueue.model.PatientInfo;
  
 @Controller
 public class LoginController {
 	private ApplicationContext context = 
 			new ClassPathXmlApplicationContext("applicationContext.xml");
 	
-	/*public static void main(String[] args) {
-		ApplicationContext context = 
-	             new ClassPathXmlApplicationContext("applicationContext.xml");
-		UserDao userDao = (UserDao)context.getBean("userDao");
-		User user = (User)context.getBean("user");
-		user.setId("office1");
-		user.setUserName("user1");
-		user.setPassword("password1");
-		user.setStatus("success");
-		userDao.insert(user);
-	}*/
-
-	
-	@RequestMapping(value="/initInfo", method = RequestMethod.POST)
+	@RequestMapping(value="/initData", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> initInfo(String opcode) {
+	public Map<String, Object> initInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String opcode = request.getParameter("opcode");
+		String officeId = request.getParameter("officeId");
+		
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		modelMap.put("opcode", "init");
-		if (opcode.equals("init")) {
-			List<User> users = new ArrayList<User>();
-			User user = (User)context.getBean("user");
+		modelMap.put("opcode", "initData");
+		OfficeDao officeDao = (OfficeDao)context.getBean("officeDao");
+		Office office = (Office)context.getBean("office");
+		if (opcode.equals("initData")) {
+			modelMap.put("status", "success");
+			List<Clinic> clinics = new ArrayList<Clinic>();
+			List<PatientInfo> firTreats = new ArrayList<PatientInfo>();
+			List<PatientInfo> twiTreas = new ArrayList<PatientInfo>();
+			List<PatientInfo> triTreas = new ArrayList<PatientInfo>();
+			office = officeDao.getOffice(officeId);
+			/*User user = (User)context.getBean("user");
 			user.setOId("id1");
 			user.setUserName("user1");
 			
@@ -56,10 +57,14 @@ public class LoginController {
 			users.add(user);
 			users.add(user1);
 			modelMap.put("status", "success");
-			modelMap.put("officeList", users);
+			modelMap.put("officeList", users);*/
+			
+			
+			//Office office = 
 		} else {
 			modelMap.put("status", "fail");
 		};
+		modelMap.put("office", office);
 		return modelMap;
 	}
 	
@@ -75,7 +80,7 @@ public class LoginController {
 		System.out.println(opcode);
 		if (opcode.equals("register")) {
 			String officeId = request.getParameter("officeId");
-			if (userDao.isExit(username)) {
+			if (userDao.isEmpty(username)) {
 				user.setOId(officeId);
 				user.setUserName(username);
 				user.setPassword(password);
@@ -84,7 +89,7 @@ public class LoginController {
 			} else {
 				user.setStatus(Status.user_exited.toString());
 			}
-		} else if (opcode.equals("login")) {
+		} else if (opcode.equals("0")) {
 			System.out.println("login");
 			User regiestedUser = userDao.getUserWithPassword(username, password);
 
@@ -98,15 +103,5 @@ public class LoginController {
 		}
 		
 		return user;
-	}
-	
-	@RequestMapping(value="/test", method = RequestMethod.GET)
-	public String test() {
-		UserDao userDao = (UserDao)context.getBean("userDao");
-//		User user = (User)context.getBean("user");
-//		userDao.insert(user);
-		User user = userDao.getUser("123");
-		System.out.println(user.getUserName());
-		return "test";
 	}
 }

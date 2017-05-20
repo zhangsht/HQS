@@ -24,6 +24,20 @@
   		<property name="status" value="fail"/>
   	</bean>
   	
+  	<bean id="office" class="com.iQueue.model.Office">
+  		<property name="oId" value=""/>
+  		<property name="name" value=""/>
+  		<property name="firTreatId" value=""/>
+  		<property name="twiTreatId" value=""/>
+  		<property name="triTreatId" value=""/>
+  	</bean>
+  	
+  	<bean id="clinic" class="com.iQueue.model.Clinic">
+  		<property name="cId" value=""/>
+  		<property name="name" value=""/>
+  		<property name="oId" value=""/>
+  	</bean>
+  	
     <bean id="dataSource"
 	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -34,6 +48,11 @@
 	
 	<bean id="userDao" 
       class="com.iQueue.dao.UserDao">
+      <property name="dataSource"  ref="dataSource" />    
+   </bean>
+   
+   <bean id="officeDao" 
+      class="com.iQueue.dao.OfficeDao">
       <property name="dataSource"  ref="dataSource" />    
    </bean>
    

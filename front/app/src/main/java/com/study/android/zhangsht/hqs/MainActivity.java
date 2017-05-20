@@ -2,18 +2,29 @@ package com.study.android.zhangsht.hqs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
 
 
 public class MainActivity extends AppCompatActivity {
     private Fragment officeFragment, queueFragment, homeFragment;
     private Fragment currentFragment;
+
+    private String officeId;
+
+    private MyHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String status = intent.getStringExtra("status");
+            officeId = intent.getStringExtra("officeId");
             if (status.equals("login")) {
                 Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
                 initOffice();
@@ -36,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
                 initOffice();
             }
+            Toast.makeText(this, officeId, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -45,10 +58,96 @@ public class MainActivity extends AppCompatActivity {
         officeFragment = new OfficeFragment();
         homeFragment = new HomeFragment();
         queueFragment = new QueueFragment();
+        handler = new MyHandler();
     }
 
     private void initOffice() {
+        String url = "http://192.168.137.1:8080/iQueue/initData";
+        try {
+            String params = "opcode=" + URLEncoder.encode("initData", "UTF-8") +
+                    "&officeId=" + URLEncoder.encode(officeId, "UTF-8");
 
+            HttpTool.sendRequest(url, params, new HttpCallbackListener() {
+                @Override
+                public void onFinish(String response) {
+                    Message message = new Message();
+                    message.what = 0;
+                    message.obj = response.toString();
+                    handler.sendMessage(message);
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Toast.makeText(MainActivity.this, "初始化失败", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i("HttpURLConnection.POST", "login 请求失败");
+        }
+    }
+
+    class MyHandler extends Handler {
+        public MyHandler() {
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    String response = (String) msg.obj;
+                    String office = "";
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
+                        office = jsonObject.getString("office");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //String office = parseItemJSONWithJSONObject(response);
+                    Toast.makeText(MainActivity.this, office, Toast.LENGTH_LONG).show();
+                   /* if (status.equals("success")) {
+
+                    } else {
+                        Toast.makeText(MainActivity.this, status, Toast.LENGTH_SHORT).show();
+                    }*/
+                    break;
+            }
+        }
+    }
+
+    private String parseItemJSONWithJSONObject(String jsonData) {
+        String office = null;
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
+            office = jsonObject.getString("office");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return office == null ? "" : office;
+
+
+        /*StringBuffer sb =new StringBuffer();
+        try {
+            //第一步：将从网络字符串jsonData字符串装入JSONObject，即JSONObject
+            JSONObject jsonObject = new JSONObject(jsonData);
+            //第二步：因为多条数据，所以将"取出来的、要遍历的"字段装入JSONArray（这里要遍历data字段）
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            //第三步：循环遍历，依次取出JSONObject对象
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+                String time = jsonObject2.getString("time");
+                String ftime = jsonObject2.getString("ftime");
+                String context = jsonObject2.getString("context");
+                sb.append("time: " + time+"  "+"ftime: " + ftime+"\n"+"context: " + context+"\n\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();*/
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

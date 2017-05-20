@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText username;
     private EditText password;
 
-    private MyHandler handler;
+   private MyHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     message.what = 0;
                     message.obj = response.toString();
                     handler.sendMessage(message);
+
+                    //StartActivityWithData(response);
                 }
 
                 @Override
@@ -88,28 +90,61 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             switch (msg.what) {
                 case 0:
                     String response = (String) msg.obj;
-                    String status = parseItemJSONWithJSONObject(response);
-                    if (status.equals("success")) {
-                        StartActivityWithData();
-                    } else {
-                        Toast.makeText(LoginActivity.this, status, Toast.LENGTH_SHORT).show();
-                    }
+                    StartActivityWithData(response);
                     break;
             }
         }
     }
 
-    private void StartActivityWithData() {
-        Handler handler = new Handler();
-        handler.post(new Runnable() {
+    private void StartActivityWithData(final String response) {
+        String status = "";
+        String officeId = "";
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
+            status = jsonObject.getString("status");
+            officeId = jsonObject.getString("oid");
+        } catch (Exception e) {
+            Toast.makeText(LoginActivity.this, "响应解析失败", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+        if (status.equals("success")) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("status", "login");
+            intent.putExtra("officeId", officeId);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(LoginActivity.this, status, Toast.LENGTH_SHORT).show();
+        }
+        /*Handler handler1 = new Handler();
+        handler1.post(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("status", "login");
-                startActivity(intent);
-                finish();
+                String status = "";
+                String officeId = "";
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
+                    status = jsonObject.getString("status");
+                    officeId = jsonObject.getString("oId");
+                } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "响应解析失败", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+
+                if (status.equals("success")) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("status", "login");
+                    intent.putExtra("officeId", officeId);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, status, Toast.LENGTH_SHORT).show();
+                }
             }
-        });
+        });*/
     }
 
     private String parseItemJSONWithJSONObject(String jsonData) {
