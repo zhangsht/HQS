@@ -18,7 +18,7 @@
   	<context:component-scan base-package="com.iQueue.model"/>
   	
   	<bean id="user" class="com.iQueue.model.User">
-  		<property name="id" value=""/>
+  		<property name="oId" value=""/>
   		<property name="userName" value=""/>
   		<property name="password" value=""/>
   		<property name="status" value="fail"/>

@@ -24,7 +24,7 @@ public class UserDao implements UserDaoImp {
 	private static final class UserMapper implements RowMapper<User> {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
-			user.setId(rs.getString("o_id"));
+			user.setOId(rs.getString("o_id"));
 			user.setUserName(rs.getString("username"));
 			user.setPassword(rs.getString("password"));
 			user.setStatus(rs.getString("status"));
@@ -38,7 +38,7 @@ public class UserDao implements UserDaoImp {
 	 */
 	public void insert(User user) {
 		String sql = "insert into user (o_id, username, password, status) values(?, ?, ?, ?)";
-		jdbcTemplate.update(sql, user.getId(), user.getUserName(), user.getPassword(), user.getStatus());
+		jdbcTemplate.update(sql, user.getOId(), user.getUserName(), user.getPassword(), user.getStatus());
 	}
 	
 	
@@ -75,7 +75,7 @@ public class UserDao implements UserDaoImp {
 	public void update(User user) {
 		String sql = "update user set o_id=? where o_id=?";
 		jdbcTemplate.update(sql,
-				user.getId());
+				user.getOId());
 	}
 	
 	public User getUser(String userName) {

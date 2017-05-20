@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -43,11 +46,11 @@ public class LoginController {
 		if (opcode.equals("init")) {
 			List<User> users = new ArrayList<User>();
 			User user = (User)context.getBean("user");
-			user.setId("id1");
+			user.setOId("id1");
 			user.setUserName("user1");
 			
 			User user1 = (User)context.getBean("user");
-			user1.setId("id2");
+			user1.setOId("id2");
 			user1.setUserName("user2");
 			
 			users.add(user);
@@ -62,11 +65,18 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping(value="/user", method = RequestMethod.POST)
-	protected User login(String opcode, String username, String password) throws Exception {
+	protected User login(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//String username, String password
+		String opcode = request.getParameter("opcode");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		UserDao userDao = (UserDao)context.getBean("userDao");
 		User user = (User)context.getBean("user");
-		if (opcode.equals("regist")) {
+		System.out.println(opcode);
+		if (opcode.equals("register")) {
+			String officeId = request.getParameter("officeId");
 			if (userDao.isExit(username)) {
+				user.setOId(officeId);
 				user.setUserName(username);
 				user.setPassword(password);
 				user.setStatus(Status.success.toString());
@@ -74,12 +84,10 @@ public class LoginController {
 			} else {
 				user.setStatus(Status.user_exited.toString());
 			}
-		} else if (opcode.equals("0")) {
+		} else if (opcode.equals("login")) {
 			System.out.println("login");
 			User regiestedUser = userDao.getUserWithPassword(username, password);
-//			regiestedUser.setUserName("zhangsht1");
-//			regiestedUser.setPassword("123");
-//			regiestedUser.setStatus("success");
+
 			if (regiestedUser != null) {
 				regiestedUser.setStatus(Status.success.toString());
 			} else {

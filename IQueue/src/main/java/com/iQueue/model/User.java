@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 	
-	private String id;
+	private String oId;
 	private String userName;
 	private String password;
 	private String status;
 	
-	public void setId(String id) {
-		this.id = id;
+	public void setOId(String id) {
+		this.oId = id;
 	}
-	public String getId() {
-		return id;
+	public String getOId() {
+		return oId;
 	}
 	
 	public void setUserName(String name) {
