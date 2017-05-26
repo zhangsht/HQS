@@ -1,4 +1,4 @@
-package com.study.android.zhangsht.hqs;
+package com.study.android.zhangsht.hqs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Handler;
 import android.os.Message;
+
+import com.study.android.zhangsht.hqs.R;
+import com.study.android.zhangsht.hqs.utils.HttpCallbackListener;
+import com.study.android.zhangsht.hqs.utils.HttpTool;
 
 import org.json.JSONObject;
 

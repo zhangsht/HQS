@@ -1,4 +1,4 @@
-package com.study.android.zhangsht.hqs;
+package com.study.android.zhangsht.hqs.utils;
 
 /**
  * Created by zhangsht on 2017/5/19.

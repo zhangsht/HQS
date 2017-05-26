@@ -1,4 +1,4 @@
-package com.study.android.zhangsht.hqs;
+package com.study.android.zhangsht.hqs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.study.android.zhangsht.hqs.R;
+import com.study.android.zhangsht.hqs.fragment.HomeFragment;
+import com.study.android.zhangsht.hqs.fragment.OfficeFragment;
+import com.study.android.zhangsht.hqs.fragment.QueueFragment;
+import com.study.android.zhangsht.hqs.utils.HttpCallbackListener;
+import com.study.android.zhangsht.hqs.utils.HttpTool;
 
 import org.json.JSONObject;
 
@@ -40,15 +47,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String status = intent.getStringExtra("status");
-            officeId = intent.getStringExtra("officeId");
-            if (status.equals("login")) {
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                initOffice();
-            } else if (status.equals("register")) {
-                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                initOffice();
+            if (status != null) {
+                officeId = intent.getStringExtra("officeId");
+                if (status.equals("login")) {
+                    Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+                    initOffice();
+                } else if (status.equals("register")) {
+                    Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                    initOffice();
+                }
+                Toast.makeText(this, officeId, Toast.LENGTH_SHORT).show();
             }
-            Toast.makeText(this, officeId, Toast.LENGTH_SHORT).show();
         }
     }
 
