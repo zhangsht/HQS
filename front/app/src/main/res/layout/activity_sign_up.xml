@@ -82,7 +82,6 @@
                     android:hint="确认密码"
                     android:inputType="textPassword"
                     android:maxLines="1" />
-
             </android.support.design.widget.TextInputLayout>
 
 

@@ -9,7 +9,7 @@ public class PatientInfo {
 	private String qId;
 	private String dId;  // 给病人看病的医生信息
 	private Sex sex;  // 病人性别
-	private String age;  // 病人年龄
+	private int age;  // 病人年龄
 	private Date regTime; // 病人挂号时间
 	private Date arrTime;  // 病人到科室分诊护士站的报道时间
 	private String sId;  // 病人体征信息
@@ -42,10 +42,10 @@ public class PatientInfo {
 		this.sex = sex;
 	}
 	
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
-	public void setAge(String age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 	

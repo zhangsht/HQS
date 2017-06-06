@@ -9,12 +9,14 @@ public class ClinicItem {
     private String doctorName;
     private String inTreatName;
     private String waitTreatNames;
+    private String afterTreatNames;
 
-    public ClinicItem(String clinicName, String doctorName, String inTreatName, String waitTreatName) {
+    public ClinicItem(String clinicName, String doctorName, String inTreatName, String waitTreatName, String afterTreatNames) {
         this.clinicName = clinicName;
         this.doctorName = doctorName;
         this.inTreatName = inTreatName;
         this.waitTreatNames = waitTreatName;
+        this.afterTreatNames = afterTreatNames;
     }
 
     public String getClinicName() {
@@ -47,5 +49,13 @@ public class ClinicItem {
 
     public void setWaitTreatNames(String waitTreatName) {
         this.waitTreatNames = waitTreatName;
+    }
+
+    public String getAfterTreatNames() {
+        return afterTreatNames;
+    }
+
+    public void setAfterTreatNames(String afterTreatNames) {
+        this.afterTreatNames = afterTreatNames;
     }
 }

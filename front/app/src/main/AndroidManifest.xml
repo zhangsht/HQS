@@ -32,7 +32,7 @@
         <activity
             android:name=".activity.MyClinic"
             android:label="@string/title_activity_my_clinic"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.light"></activity>
     </application>
 
 </manifest>

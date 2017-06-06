@@ -11,6 +11,7 @@ public class SignInfo {
 	public int bPressure;  // ÑªÑ¹
 	public String description;  // ²¡Ö¢ÃèÊö
 	public double bsugar;  // ÑªÌÇ
+	
 	public double getHeight() {
 		return height;
 	}

@@ -31,8 +31,6 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         init();
-
-
     }
 
     @Nullable
@@ -44,15 +42,15 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            list.add(new ClinicItem("0" + i, "doc" + i, "pat" + i, "wait"));
+            list.add(new ClinicItem("0" + i, "doc" + i, "pat" + i, "wait", ""));
         }
 
         ClinicAdapter adapter = new ClinicAdapter(list, activity);
 
         final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
-//itemTouchHelper与RecyclerView关联
+        //itemTouchHelper与RecyclerView关联
         itemTouchHelper.attachToRecyclerView(recyclerView);
-//设置ImgView的触摸监听事件
+        //设置ImgView的触摸监听事件
         adapter.setOnItemTouchListener(new ClinicAdapter.OnItemTouchListener() {
 
             @Override
