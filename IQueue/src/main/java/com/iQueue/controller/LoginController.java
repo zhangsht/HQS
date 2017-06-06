@@ -1,9 +1,14 @@
 package com.iQueue.controller;
  
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.iQueue.dao.ClinicDao;
 import com.iQueue.dao.UserDao;
+import com.iQueue.model.Clinic;
 import com.iQueue.model.Queue;
 import com.iQueue.model.Status;
 import com.iQueue.model.User;
@@ -24,6 +31,13 @@ import com.iQueue.model.User;
 public class LoginController {
 	private ApplicationContext context = 
 			new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	public static void main(String[] args) {
+		Date date = new Date();
+		String ss = new String("" + date.getTime());
+
+		System.out.println(ss);
+	}
 	
 	@RequestMapping(value="/initInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -44,11 +58,16 @@ public class LoginController {
 			
 			List<Queue> nameList = new ArrayList<Queue>();
 			
-			for (int i = 0; i < 10; i++) {
-				Queue queue = new Queue("", "patient " + i, "", "");
+			for (int i = 0; i < 2; i++) {
+				Date date = new Date();
+				long s = date.getTime();
+				String ss = new String("" + s);
+				Queue queue = new Queue("", "patient " + i, ss, "");
 				nameList.add(queue);
+				Thread.sleep(1000);
 			}
 			
+			Collections.reverse(nameList);
 			modelMap.put("first_queue", nameList);
 			//office = officeDao.getOffice(officeId);
 		} else {

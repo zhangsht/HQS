@@ -15,6 +15,18 @@ public class UserDao implements UserDaoImp {
 	
 	private JdbcTemplate jdbcTemplate;
 	private DataSource dataSource;
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
+	public JdbcTemplate getJbdcTemplate() {
+		return jdbcTemplate;
+	}
 	
 	/*
 	 * 通过RowMapper赋值给user
@@ -100,18 +112,4 @@ public class UserDao implements UserDaoImp {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-	
-	public JdbcTemplate getJbdcTemplate() {
-		return jdbcTemplate;
-	}
-	
 }

@@ -2,15 +2,17 @@ package com.iQueue.model;
 
 /* ²¡ÈËÌåÕ÷ĞÅÏ¢ */
 public class SignInfo {
-	
+	public String sId;
+	public String oId;
 	public double height;  // Éí¸ß
 	public double weight;  // ÌåÖØ
 	public double temperature;  // ÌåÎÂ
 	public int respiration;  // ºôÎü
 	public int pulse;  // Âö²«
-	public int bPressure;  // ÑªÑ¹
+	public int bloodPressure;  // ÑªÑ¹
+	public double bloodSugar;  // ÑªÌÇ
 	public String description;  // ²¡Ö¢ÃèÊö
-	public double bsugar;  // ÑªÌÇ
+	
 	
 	public double getHeight() {
 		return height;
@@ -43,10 +45,10 @@ public class SignInfo {
 		this.pulse = pulse;
 	}
 	public int getbPressure() {
-		return bPressure;
+		return bloodPressure;
 	}
 	public void setbPressure(int bPressure) {
-		this.bPressure = bPressure;
+		this.bloodPressure = bPressure;
 	}
 	public String getDescription() {
 		return description;
@@ -55,9 +57,9 @@ public class SignInfo {
 		this.description = description;
 	}
 	public double getBsugar() {
-		return bsugar;
+		return bloodSugar;
 	}
 	public void setBsugar(double bsugar) {
-		this.bsugar = bsugar;
+		this.bloodSugar = bsugar;
 	}
 }

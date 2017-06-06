@@ -5,10 +5,10 @@ public class Clinic {
 	private String name;
 	private String oId;
 	
-	public String getoId() {
+	public String getOId() {
 		return oId;
 	}
-	public void setoId(String oId) {
+	public void setOId(String oId) {
 		this.oId = oId;
 	}
 	public String getCId() {
