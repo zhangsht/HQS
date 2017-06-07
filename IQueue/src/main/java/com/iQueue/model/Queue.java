@@ -3,15 +3,15 @@ package com.iQueue.model;
 import java.util.Date;
 
 public class Queue {
+	private String qId;
 	private String cId;
 	private String name;
 	private String time;
-	private String belong;
 	public Queue(String cId, String name, String time, String belong) {
 		this.cId = cId;
 		this.name = name;
 		this.time = time;
-		this.belong = belong;
+		this.qId = belong;
 	}
 	public String getcId() {
 		return cId;
@@ -31,10 +31,16 @@ public class Queue {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public String getBelong() {
-		return belong;
+	public String getqId() {
+		return qId;
 	}
-	public void setBelong(String belong) {
-		this.belong = belong;
+	public void setqId(String qId) {
+		this.qId = qId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }
