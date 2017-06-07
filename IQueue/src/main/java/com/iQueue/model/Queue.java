@@ -1,7 +1,5 @@
 package com.iQueue.model;
 
-import java.util.Date;
-
 public class Queue {
 	private String qId;
 	private String cId;

@@ -34,27 +34,18 @@ public class LoginController {
 	
 	public static void main(String[] args) {
 		Date date = new Date();
-		String ss = new String("" + date.getTime());
 
-		System.out.println(ss);
+		System.out.println(date);
 	}
 	
 	@RequestMapping(value="/initInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> initInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String opcode = request.getParameter("opcode");
-		//String officeId = request.getParameter("officeId");
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		modelMap.put("opcode", "init");
-		//OfficeDao officeDao = (OfficeDao)context.getBean("officeDao");
-		//Office office = (Office)context.getBean("office");
 		if (opcode.equals("init")) {
 			modelMap.put("status", "success");
-			/*List<Clinic> clinics = new ArrayList<Clinic>();
-			
-			List<PatientInfo> firTreats = new ArrayList<PatientInfo>();
-			List<PatientInfo> twiTreas = new ArrayList<PatientInfo>();
-			List<PatientInfo> triTreas = new ArrayList<PatientInfo>();*/
 			
 			List<Queue> nameList = new ArrayList<Queue>();
 			
@@ -69,11 +60,9 @@ public class LoginController {
 			
 			Collections.reverse(nameList);
 			modelMap.put("first_queue", nameList);
-			//office = officeDao.getOffice(officeId);
 		} else {
 			modelMap.put("status", "fail");
 		};
-		//modelMap.put("office", office);
 		
 		return modelMap;
 	}

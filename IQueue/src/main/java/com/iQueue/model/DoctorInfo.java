@@ -1,7 +1,7 @@
 package com.iQueue.model;
 
-import java.util.Date;
-import java.util.Queue;
+import java.sql.Date;
+
 import com.iQueue.model.PatientInfo;
 
 public class DoctorInfo {
@@ -9,8 +9,8 @@ public class DoctorInfo {
 	private String name;  // 医生姓名
 	private String cId;
 	private String profile;  // 医生简介
-	private Date startTime;  // 医生开始工作时间
-	private Date endTime;  // 医生结束工作时间
+	private String startTime;  // 医生开始工作时间
+	private String endTime;  // 医生结束工作时间
 	private String preTreatId;
 	private String inTreatId;
 	private String afterTreatId;
@@ -43,17 +43,17 @@ public class DoctorInfo {
 		this.profile = profile;
 	}
 	
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 	
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	

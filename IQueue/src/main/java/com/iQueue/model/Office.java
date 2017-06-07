@@ -1,9 +1,5 @@
 package com.iQueue.model;
 
-import java.util.List;
-
-import com.iQueue.model.DoctorInfo;
-
 public class Office {
 	private String oId;
 	private String name;

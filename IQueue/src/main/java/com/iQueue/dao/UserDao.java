@@ -6,26 +6,22 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import com.iQueue.model.User;
+import com.iQueue.service.DataSourceUtills;
 
 public class UserDao implements UserDaoImp {
+private JdbcTemplate jdbcTemplate;
 	
-	private JdbcTemplate jdbcTemplate;
-	private DataSource dataSource;
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
-	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-	
-	public JdbcTemplate getJbdcTemplate() {
-		return jdbcTemplate;
+	public UserDao() {
+		ApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		DataSourceUtills dataSourceUtills = (DataSourceUtills) context.getBean("dataSourceUtils");
+		jdbcTemplate = dataSourceUtills.getJbdcTemplate();
 	}
 	
 	/*
@@ -106,10 +102,5 @@ public class UserDao implements UserDaoImp {
 			return null;
 		}
 		return items.get(0);
-	}
-
-	public List<User> listUsers() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

@@ -24,20 +24,29 @@ public class ClinicController {
 	@ResponseBody
 	public Map<String, Object> initOffice(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String opcode = request.getParameter("opcode");
-		String officeId = request.getParameter("clinicId");
+		String clinicId = request.getParameter("clinicId");
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		modelMap.put("opcode", "clinicDetail");
 		if (opcode.equals("clinicDetail")) {
 			modelMap.put("status", "success");
-			
-			DoctorInfo doctorInfo = new DoctorInfo();
-			modelMap.put("doctorInfo", doctorInfo);
-			List<Queue> preList = null ;
-			List<Queue> inList = null;
-			List<Queue> afterList = null;
-			modelMap.put("preTreat", preList);
-			modelMap.put("inTreat", preList);
-			modelMap.put("afterTreat", preList);
+			DoctorDao doctorDao = new DoctorDao();
+			DoctorInfo doctorInfo = doctorDao.getDoctorInfo(clinicId);
+			System.out.println(doctorInfo);
+			if (doctorInfo != null) {
+				modelMap.put("doctorInfo", doctorInfo);
+				String preTreatId = doctorInfo.getPreTreatId();
+				String inTreatId = doctorInfo.getInTreatId();
+				String afterTreatId = doctorInfo.getAfterTreatId();
+				
+				List<Queue> preList = null ;
+				List<Queue> inList = null;
+				List<Queue> afterList = null;
+				modelMap.put("preTreat", preList);
+				modelMap.put("inTreat", preList);
+				modelMap.put("afterTreat", preList);
+			} else {
+				modelMap.put("status", "fail");
+			}
 		} else {
 			modelMap.put("status", "fail");
 		};
