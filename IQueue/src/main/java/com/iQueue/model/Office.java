@@ -4,8 +4,8 @@ public class Office {
 	private String oId;
 	private String name;
 	private String firTreatId;
-	private String twiTreatId;
-	private String triTreatId;
+	private String secTreatId;
+	private String dispatchTreatId;
 	
 	public String getFirTreatId() {
 		return firTreatId;
@@ -14,25 +14,23 @@ public class Office {
 		this.firTreatId = firTreatId;
 	}
 	
-	public String getTwiTreatId() {
-		return twiTreatId;
-	}
-	public void setTwiTreatId(String twiTreatId) {
-		this.twiTreatId = twiTreatId;
-	}
-	
-	public String getTriTreatId() {
-		return triTreatId;
-	}
-	public void setTriTreatId(String triTreatId) {
-		this.triTreatId = triTreatId;
-	}
-	
-	public void setOId(String Id) {
-		this.oId = Id;
-	}
-	public String getOfficeId() {
+	public String getoId() {
 		return oId;
+	}
+	public void setoId(String oId) {
+		this.oId = oId;
+	}
+	public String getSecTreatId() {
+		return secTreatId;
+	}
+	public void setSecTreatId(String secTreatId) {
+		this.secTreatId = secTreatId;
+	}
+	public String getDispatchTreatId() {
+		return dispatchTreatId;
+	}
+	public void setDispatchTreatId(String dispatchTreatId) {
+		this.dispatchTreatId = dispatchTreatId;
 	}
 	
 	public void setName(String name) {

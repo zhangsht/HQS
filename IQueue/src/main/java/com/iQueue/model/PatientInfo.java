@@ -1,25 +1,65 @@
 package com.iQueue.model;
 
-import java.util.Date;
-
 public class PatientInfo {
+	public PatientInfo() {
+		super();
+	}
+
+	public PatientInfo(String pId, String name, String cardNumber, String sex, String age, String registerTime,
+			String arriveTime, String qId) {
+		super();
+		this.pId = pId;
+		this.name = name;
+		this.cardNumber = cardNumber;
+		this.sex = sex;
+		this.age = age;
+		this.registerTime = registerTime;
+		this.arriveTime = arriveTime;
+		this.qId = qId;
+	}
 	private String pId;  // 挂号序列号
 	private String name;  // 病人姓名
 	private String cardNumber; // 病人就序卡列号
 	
 	private String sex;  // 病人性别
-	private int age;  // 病人年龄
+	private String age;  // 病人年龄
 	private String registerTime; // 病人挂号时间
 	private String arriveTime;  // 病人到科室分诊护士站的报道时间
-	private String sId;  // 病人体征信息
 	private String qId;
+//	private String oId;
 	
-	public String getPId() {
+	
+	public String getpId() {
 		return pId;
 	}
-	public void setPId(String pId) {
+	
+	public void setpId(String pId) {
 		this.pId = pId;
 	}
+	public String getRegisterTime() {
+		return registerTime;
+	}
+	public void setRegisterTime(String registerTime) {
+		this.registerTime = registerTime;
+	}
+	public String getArriveTime() {
+		return arriveTime;
+	}
+	public void setArriveTime(String arriveTime) {
+		this.arriveTime = arriveTime;
+	}
+	public String getqId() {
+		return qId;
+	}
+	public void setqId(String qId) {
+		this.qId = qId;
+	}
+	/*public String getoId() {
+		return oId;
+	}
+	public void setoId(String oId) {
+		this.oId = oId;
+	}*/
 	
 	public String getName() {
 		return name;
@@ -42,31 +82,10 @@ public class PatientInfo {
 		this.sex = sex;
 	}
 	
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
-	}
-	
-	public String getRegTime() {
-		return registerTime;
-	}
-	public void setRegTime(String regTime) {
-		this.registerTime = regTime;
-	}
-	
-	public String getArrTime() {
-		return arriveTime;
-	}
-	public void setArrTime(String arrTime) {
-		this.arriveTime = arrTime;
-	}
-	
-	public String getsId() {
-		return sId;
-	}
-	public void setsId(String sId) {
-		this.sId = sId;
 	}
 }

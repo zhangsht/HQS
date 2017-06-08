@@ -43,7 +43,6 @@ public class LoginController {
 			modelMap.put("status", "success");
 			
 			List<Queue> nameList = new ArrayList<Queue>();
-			
 			for (int i = 0; i < 2; i++) {
 				Date date = new Date();
 				long s = date.getTime();
@@ -65,12 +64,11 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value="/user", method = RequestMethod.POST)
 	protected User login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//String username, String password
 		String opcode = request.getParameter("opcode");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		UserDao userDao = new UserDao();
-		User user = (User)context.getBean("user");
+		User user = new User();
 		System.out.println(opcode);
 		
 		if (opcode.equals("register")) {
@@ -91,7 +89,7 @@ public class LoginController {
 			if (regiestedUser != null) {
 				regiestedUser.setStatus(Status.success.toString());
 			} else {
-				regiestedUser = (User)context.getBean("user");
+				regiestedUser = new User();
 				regiestedUser.setStatus(Status.name_or_password_error.toString());
 			}
 			return regiestedUser;

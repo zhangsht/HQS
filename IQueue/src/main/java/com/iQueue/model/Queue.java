@@ -5,6 +5,7 @@ public class Queue {
 	private String cId;
 	private String name;
 	private String time;
+	
 	public Queue(String cId, String name, String time, String belong) {
 		this.cId = cId;
 		this.name = name;

@@ -2,64 +2,88 @@ package com.iQueue.model;
 
 /* 病人体征信息 */
 public class SignInfo {
-	public String sId;
-	public String oId;
-	public double height;  // 身高
-	public double weight;  // 体重
-	public double temperature;  // 体温
-	public int respiration;  // 呼吸
-	public int pulse;  // 脉搏
-	public int bloodPressure;  // 血压
-	public double bloodSugar;  // 血糖
+	
+	public SignInfo(String pId, String height, String weight, String temperature, String respiration, String pulse,
+			String bloodPressure, String bloodSugar, String description) {
+		super();
+		this.pId = pId;
+		this.height = height;
+		this.weight = weight;
+		this.temperature = temperature;
+		this.respiration = respiration;
+		this.pulse = pulse;
+		this.bloodPressure = bloodPressure;
+		this.bloodSugar = bloodSugar;
+		this.description = description;
+	}
+	public String pId;
+	public String height;  // 身高
+	public String weight;  // 体重
+	public String temperature;  // 体温
+	public String respiration;  // 呼吸
+	public String pulse;  // 脉搏
+	public String bloodPressure;  // 血压
+	public String bloodSugar;  // 血糖
 	public String description;  // 病症描述
 	
-	
-	public double getHeight() {
+	/*public String getsId() {
+		return sId;
+	}
+	public void setsId(String sId) {
+		this.sId = sId;
+	}*/
+	public String getpId() {
+		return pId;
+	}
+	public void setpId(String pId) {
+		this.pId = pId;
+	}
+	public String getHeight() {
 		return height;
 	}
-	public void setHeight(double height) {
+	public void setHeight(String height) {
 		this.height = height;
 	}
-	public double getWeight() {
+	public String getWeight() {
 		return weight;
 	}
-	public void setWeight(double weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-	public double getTemperature() {
+	public String getTemperature() {
 		return temperature;
 	}
-	public void setTemperature(double temperature) {
+	public void setTemperature(String temperature) {
 		this.temperature = temperature;
 	}
-	public int getRespiration() {
+	public String getRespiration() {
 		return respiration;
 	}
-	public void setRespiration(int respiration) {
+	public void setRespiration(String respiration) {
 		this.respiration = respiration;
 	}
-	public int getPulse() {
+	public String getPulse() {
 		return pulse;
 	}
-	public void setPulse(int pulse) {
+	public void setPulse(String pulse) {
 		this.pulse = pulse;
 	}
-	public int getbPressure() {
+	public String getBloodPressure() {
 		return bloodPressure;
 	}
-	public void setbPressure(int bPressure) {
-		this.bloodPressure = bPressure;
+	public void setBloodPressure(String bloodPressure) {
+		this.bloodPressure = bloodPressure;
+	}
+	public String getBloodSugar() {
+		return bloodSugar;
+	}
+	public void setBloodSugar(String bloodSugar) {
+		this.bloodSugar = bloodSugar;
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public double getBsugar() {
-		return bloodSugar;
-	}
-	public void setBsugar(double bsugar) {
-		this.bloodSugar = bsugar;
 	}
 }

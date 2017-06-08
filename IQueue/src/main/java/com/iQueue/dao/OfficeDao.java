@@ -32,13 +32,13 @@ public class OfficeDao implements OfficeDaoImp {
 	 */
 	private static final class OfficeMapper implements RowMapper<Office> {
 		public Office mapRow(ResultSet rs, int rowNum) throws SQLException {
-			// 缺少医生信息和队列信息
+			
 			Office office = new Office();
-			office.setOId(rs.getString("o_id"));
+			office.setoId(rs.getString("o_id"));
 			office.setName(rs.getString("name"));
 			office.setFirTreatId(rs.getString("firTreatId"));
-			office.setTwiTreatId(rs.getString("twiTreatId"));
-			office.setTriTreatId(rs.getString("triTreatId"));
+			office.setSecTreatId(rs.getString("secTreatId"));
+			office.setDispatchTreatId(rs.getString("dispatchTreatId"));
 			return office;
 		}
 	}
@@ -80,7 +80,7 @@ public class OfficeDao implements OfficeDaoImp {
 	public void insert(Office office) {
 		// 还缺少医生信息和队列信息
 		String sql = "insert into office (id,name) values(?,?)";
-		jdbcTemplate.update(sql, new Object[] { office.getOfficeId(), office.getName() });
+		jdbcTemplate.update(sql, new Object[] { office.getoId(), office.getName() });
 	}
 
 	/*
@@ -101,6 +101,6 @@ public class OfficeDao implements OfficeDaoImp {
 	public void update(Office office) {
 		String sql = "update office set name=? where id=?";
 		// 还缺少医生信息和队列信息
-		jdbcTemplate.update(sql, office.getName(), office.getOfficeId());
+		jdbcTemplate.update(sql, office.getName(), office.getoId());
 	}
 }

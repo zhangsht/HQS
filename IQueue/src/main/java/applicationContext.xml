@@ -17,27 +17,6 @@
   
   	<context:component-scan base-package="com.iQueue.model"/>
   	
-  	<bean id="user" class="com.iQueue.model.User">
-  		<property name="oId" value=""/>
-  		<property name="userName" value=""/>
-  		<property name="password" value=""/>
-  		<property name="status" value="fail"/>
-  	</bean>
-  	
-  	<bean id="office" class="com.iQueue.model.Office">
-  		<property name="oId" value=""/>
-  		<property name="name" value=""/>
-  		<property name="firTreatId" value=""/>
-  		<property name="twiTreatId" value=""/>
-  		<property name="triTreatId" value=""/>
-  	</bean>
-  	
-  	<bean id="clinic" class="com.iQueue.model.Clinic">
-  		<property name="cId" value=""/>
-  		<property name="name" value=""/>
-  		<property name="oId" value=""/>
-  	</bean>
-  	
     <bean id="dataSource"
 	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	   <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
