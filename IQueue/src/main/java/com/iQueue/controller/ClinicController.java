@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.iQueue.dao.ClinicDao;
 import com.iQueue.dao.DoctorDao;
-import com.iQueue.model.Clinic;
 import com.iQueue.model.DoctorInfo;
 import com.iQueue.model.Queue;
 

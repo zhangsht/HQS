@@ -1,14 +1,11 @@
 package com.iQueue.controller;
  
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.iQueue.dao.ClinicDao;
 import com.iQueue.dao.UserDao;
-import com.iQueue.model.Clinic;
 import com.iQueue.model.Queue;
 import com.iQueue.model.Status;
 import com.iQueue.model.User;
@@ -74,7 +69,7 @@ public class LoginController {
 		String opcode = request.getParameter("opcode");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		UserDao userDao = (UserDao)context.getBean("userDao");
+		UserDao userDao = new UserDao();
 		User user = (User)context.getBean("user");
 		System.out.println(opcode);
 		

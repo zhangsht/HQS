@@ -19,8 +19,9 @@ public class DataSourceUtills {
 	}
 	
 	public JdbcTemplate getJbdcTemplate() {
-		if (jdbcTemplate == null)
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
+		if (jdbcTemplate == null) {
+			this.jdbcTemplate = new JdbcTemplate(dataSource);
+		}
 		return jdbcTemplate;
 	}
 }
