@@ -7,10 +7,10 @@ public class PatientInfo {
 	private String name;  // 病人姓名
 	private String cardNumber; // 病人就序卡列号
 	
-	private Sex sex;  // 病人性别
+	private String sex;  // 病人性别
 	private int age;  // 病人年龄
-	private Date registerTime; // 病人挂号时间
-	private Date arriveTime;  // 病人到科室分诊护士站的报道时间
+	private String registerTime; // 病人挂号时间
+	private String arriveTime;  // 病人到科室分诊护士站的报道时间
 	private String sId;  // 病人体征信息
 	private String qId;
 	
@@ -35,10 +35,10 @@ public class PatientInfo {
 		this.cardNumber = cardNumber;
 	}
 	
-	public Sex getSex() {
+	public String getSex() {
 		return sex;
 	}
-	public void setSex(Sex sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 	
@@ -49,17 +49,17 @@ public class PatientInfo {
 		this.age = age;
 	}
 	
-	public Date getRegTime() {
+	public String getRegTime() {
 		return registerTime;
 	}
-	public void setRegTime(Date regTime) {
+	public void setRegTime(String regTime) {
 		this.registerTime = regTime;
 	}
 	
-	public Date getArrTime() {
+	public String getArrTime() {
 		return arriveTime;
 	}
-	public void setArrTime(Date arrTime) {
+	public void setArrTime(String arrTime) {
 		this.arriveTime = arrTime;
 	}
 	

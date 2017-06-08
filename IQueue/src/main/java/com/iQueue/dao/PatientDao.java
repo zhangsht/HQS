@@ -1,15 +1,15 @@
 package com.iQueue.dao;
 
-import com.iQueue.model.PatientInfo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import com.iQueue.model.Sex;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
+import com.iQueue.model.PatientInfo;
 import com.iQueue.model.SignInfo;
 import com.iQueue.service.DataSourceUtills;
 
@@ -24,6 +24,23 @@ public class PatientDao implements PatientDaoImp {
 		jdbcTemplate = dataSourceUtills.getJbdcTemplate();
 	}
 
+	
+	private static final class QueueMapper implements RowMapper<PatientInfo> {
+		public PatientInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			PatientInfo patientInfo = new PatientInfo();
+			patientInfo.setName(rs.getString("name"));
+			patientInfo.setArrTime(rs.getString("arriveTime"));
+			return patientInfo;
+		}
+	}
+	
+	
+	public List<PatientInfo> getQueues(String queueId) {
+		String SQL = "select name, arriveTime from patientInfo where qId = ? order by arriveTime desc limit 2";
+		List<PatientInfo> items = jdbcTemplate.query(SQL, new Object[] { queueId }, new QueueMapper());
+		return items;
+	}
+	
 	public void insert(PatientInfo pf, SignInfo sf) {
 		// TODO Auto-generated method stub
 		String sql = "insert into patientInfo (pId, name, cardNumber, sex, age, registerTime, arriveTime)"

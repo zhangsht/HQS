@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iQueue.dao.DoctorDao;
+import com.iQueue.dao.PatientDao;
 import com.iQueue.model.DoctorInfo;
+import com.iQueue.model.PatientInfo;
 import com.iQueue.model.Queue;
 
 @Controller
@@ -36,12 +38,13 @@ public class ClinicController {
 				String inTreatId = doctorInfo.getInTreatId();
 				String afterTreatId = doctorInfo.getAfterTreatId();
 				
-				List<Queue> preList = null ;
-				List<Queue> inList = null;
-				List<Queue> afterList = null;
+				PatientDao patientDao = new PatientDao();
+				List<PatientInfo> preList = patientDao.getQueues(preTreatId) ;
+				List<PatientInfo> inList = patientDao.getQueues(inTreatId);
+				List<PatientInfo> afterList = patientDao.getQueues(afterTreatId);
 				modelMap.put("preTreat", preList);
-				modelMap.put("inTreat", preList);
-				modelMap.put("afterTreat", preList);
+				modelMap.put("inTreat", inList);
+				modelMap.put("afterTreat", afterList);
 			} else {
 				modelMap.put("status", "fail");
 			}
