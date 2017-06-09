@@ -8,7 +8,9 @@
 		"3227ca66-e0fc-5388-d165-83af52b52d5f",
 		"0ff8b330-3b62-2724-f8e6-b7a94b1d8af2",
 		"78182378-d92d-39fb-b0b0-eb783a7e4354",
-		"d61835e6-90fb-8437-ed59-ba5978756546"
+		"d61835e6-90fb-8437-ed59-ba5978756546",
+		"c8f21c61-e9de-048d-82b5-84d70cc462d4",
+		"3e8d5075-b217-ab22-c698-a4e429f59dc8"
 	],
 	"folders": [],
 	"timestamp": 1496674102869,
@@ -77,6 +79,51 @@
 			"helperAttributes": {}
 		},
 		{
+			"id": "3e8d5075-b217-ab22-c698-a4e429f59dc8",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/change?opcode=change&newQueueId=sec8765&name=qdd",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "change",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "newQueueId",
+					"value": "sec8765",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "qdd",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/change?opcode=change&newQueueId=sec8765&name=qdd",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497006968496,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
 			"id": "49513aca-476c-6943-e03c-3e56a564a674",
 			"headers": "",
 			"headerData": [],
@@ -136,6 +183,149 @@
 			"description": "",
 			"descriptionFormat": "html",
 			"time": 1496924579646,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "c8f21c61-e9de-048d-82b5-84d70cc462d4",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/add?opcode=add&pId=patient011&qId=fir8765&name=张卫国&cardNumber=zdfs3311&sex=男&age=17&registerTime=2017-06-08 20:21:13&arriveTime=2017-06-08 20:45:13&height=1.78&weight=65kg&temperature=36.5&respiration=90&pulse=80&bloodPressure=75~115&bloodSugar=100&description=已经感冒2天 有服非处方药感冒灵",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "add",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pId",
+					"value": "patient011",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "qId",
+					"value": "fir8765",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "张卫国",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "cardNumber",
+					"value": "zdfs3311",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sex",
+					"value": "男",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "age",
+					"value": "17",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "registerTime",
+					"value": "2017-06-08 20:21:13",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "arriveTime",
+					"value": "2017-06-08 20:45:13",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "height",
+					"value": "1.78",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "weight",
+					"value": "65kg",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "temperature",
+					"value": "36.5",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "respiration",
+					"value": "90",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pulse",
+					"value": "80",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "bloodPressure",
+					"value": "75~115",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "bloodSugar",
+					"value": "100",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "description",
+					"value": "已经感冒2天 有服非处方药感冒灵",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/add?opcode=add&pId=patient011&qId=fir8765&name=张卫国&cardNumber=zdfs3311&sex=男&age=17&registerTime=2017-06-08 20:21:13&arriveTime=2017-06-08 20:45:13&height=1.78&weight=65kg&temperature=36.5&respiration=90&pulse=80&bloodPressure=75~115&bloodSugar=100&description=已经感冒2天 有服非处方药感冒灵",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497006833538,
 			"version": 2,
 			"responses": [],
 			"tests": null,

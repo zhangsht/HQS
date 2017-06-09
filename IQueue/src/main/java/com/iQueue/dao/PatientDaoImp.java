@@ -10,5 +10,6 @@ public interface PatientDaoImp {
 	public void delete(String id);
 	public void update(PatientInfo patient);
 	public PatientInfo selectByID(String id);
+	public void changeQueue(String newQueueId, String name);
 	public List<PatientInfo> find();
 }

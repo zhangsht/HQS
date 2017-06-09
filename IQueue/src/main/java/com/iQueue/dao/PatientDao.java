@@ -53,6 +53,11 @@ public class PatientDao implements PatientDaoImp {
 		}
 	}
 
+	public void changeQueue(String newQueueId, String name) {
+		String sql = "update patientInfo set qId=? where name=?";
+		jdbcTemplate.update(sql, newQueueId, name);
+	}
+
 	public void delete(String id) {
 		// TODO Auto-generated method stub
 
@@ -72,4 +77,5 @@ public class PatientDao implements PatientDaoImp {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
