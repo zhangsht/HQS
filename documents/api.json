@@ -1,0 +1,220 @@
+{
+	"id": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+	"name": "iqueue",
+	"description": "",
+	"order": [
+		"49513aca-476c-6943-e03c-3e56a564a674",
+		"dfc752f0-c1c7-7dc6-9a8c-139776d6b7c3",
+		"3227ca66-e0fc-5388-d165-83af52b52d5f",
+		"0ff8b330-3b62-2724-f8e6-b7a94b1d8af2",
+		"78182378-d92d-39fb-b0b0-eb783a7e4354",
+		"d61835e6-90fb-8437-ed59-ba5978756546"
+	],
+	"folders": [],
+	"timestamp": 1496674102869,
+	"owner": "2162906",
+	"public": false,
+	"requests": [
+		{
+			"id": "0ff8b330-3b62-2724-f8e6-b7a94b1d8af2",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/getClinicList?opcode=getClinicList&officeId=erke",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "getClinicList",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "officeId",
+					"value": "erke",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/getClinicList?opcode=getClinicList&officeId=erke",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496924566808,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "3227ca66-e0fc-5388-d165-83af52b52d5f",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/next",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/user/?opcode=login&username=ray&password=ray",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496924561126,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "49513aca-476c-6943-e03c-3e56a564a674",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/next",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496924554919,
+			"name": "localhost:8080/iQueue/user/?opcode=login&username=ray&password=ray",
+			"description": "",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"responses": []
+		},
+		{
+			"id": "78182378-d92d-39fb-b0b0-eb783a7e4354",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/user?opcode=login&username=zhangsht&password=zhangsht",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "login",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "zhangsht",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "zhangsht",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/user?opcode=login&username=zhangsht&password=zhangsht",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496924579646,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "d61835e6-90fb-8437-ed59-ba5978756546",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/officeQueue?opcode=officeQueue&officeId=guke8765",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "officeQueue",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "officeId",
+					"value": "guke8765",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/officeQueue?opcode=officeQueue&officeId=guke8765",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1496924585239,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "dfc752f0-c1c7-7dc6-9a8c-139776d6b7c3",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/clinicDetail?opcode=clinicDetail&clinicId=ks303",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "clinicDetail",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "clinicId",
+					"value": "ks303",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1496924573619,
+			"name": "localhost:8080/iQueue/clinicDetail?opcode=clinicDetail&clinicId=ke301",
+			"description": "",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"responses": []
+		}
+	]
+}
