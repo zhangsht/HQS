@@ -27,6 +27,8 @@ public class MyClinic extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_clinic);
+        Bundle extras = getIntent().getExtras();
+        String doctorInfo = extras.getString("doctorInfo");
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

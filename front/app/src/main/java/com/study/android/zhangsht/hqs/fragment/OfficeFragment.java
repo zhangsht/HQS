@@ -10,17 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.study.android.zhangsht.hqs.R;
 import com.study.android.zhangsht.hqs.activity.MyClinic;
 import com.study.android.zhangsht.hqs.adapter.ClinicAdapter;
-import com.study.android.zhangsht.hqs.model.ClinicItem;
 
 import java.util.ArrayList;
 
 public class OfficeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private ArrayList<ClinicItem> list;
+    private ArrayList<String> list = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,20 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Bundle bundle = getArguments();
+        int size = bundle.getInt("size");
+        String officeName = bundle.getString("officeName");
+        for (int i = 0; i < size; i++) {
+            list.add(bundle.getString("clinic" + i));
+        }
         View contentView = inflater.inflate(R.layout.fragment_office, container, false);
+        TextView officeText = (TextView)container.findViewById(R.id.officeName);
+        officeText.setText(officeName);
+
         recyclerView = (RecyclerView) contentView.findViewById(R.id.clinicList);
         final FragmentActivity activity = getActivity();
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new ClinicItem("0" + i, "doc" + i, "pat" + i, "wait", ""));
-        }
+
 
         ClinicAdapter adapter = new ClinicAdapter(list, activity);
 
@@ -61,6 +67,7 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void OnItemClick(int itemPosition) {
                 Intent intent = new Intent(activity, MyClinic.class);
+                intent.putExtra("doctorInfo", list.get(itemPosition));
                 startActivity(intent);
             }
         });

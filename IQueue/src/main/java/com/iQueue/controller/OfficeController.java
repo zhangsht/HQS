@@ -34,11 +34,14 @@ public class OfficeController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		modelMap.put("opcode", "getClinicList");
 		if (opcode.equals("getClinicList")) {
-			modelMap.put("status", "success");
+			OfficeDao officeDao = new OfficeDao();
+			String officeName = officeDao.getOfficeName(officeId);
 			ClinicDao clinicDao = new ClinicDao();
 			List<Clinic> clinicList = clinicDao.getClinics(officeId);
 			System.out.println(clinicList.size());
+			modelMap.put("officeName", officeName);
 			modelMap.put("clinicList", clinicList);
+			modelMap.put("status", "success");
 		} else {
 			modelMap.put("status", "fail");
 		}

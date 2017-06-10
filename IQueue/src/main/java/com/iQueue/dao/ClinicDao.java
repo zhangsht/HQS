@@ -30,14 +30,13 @@ public class ClinicDao implements ClinicDaoImp {
 			Clinic clinic = new Clinic();
 			clinic.setCId(rs.getString("cId"));
 			clinic.setName(rs.getString("name"));
-			clinic.setOId(rs.getString("oId"));
-			
+			clinic.setDoctorName(rs.getString("doctorName"));
 			return clinic;
 		}
 	}
 	
 	public List<Clinic> getClinics(String officeId) {
-		String SQL = "select * from clinic where oId = ?";
+		String SQL = "select cId, name, doctorName from clinic where oId = ?";
 		List<Clinic> items = jdbcTemplate.query(SQL, new Object[] { officeId }, new ClinicMapper());
 		return items;
 	}

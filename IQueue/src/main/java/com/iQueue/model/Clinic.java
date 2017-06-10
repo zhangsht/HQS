@@ -3,6 +3,7 @@ package com.iQueue.model;
 public class Clinic {
 	private String cId;
 	private String name;
+	private String doctorName;
 	private String oId;
 	
 	public String getOId() {
@@ -22,6 +23,12 @@ public class Clinic {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getDoctorName() {
+		return doctorName;
+	}
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
 	}
 	
 	

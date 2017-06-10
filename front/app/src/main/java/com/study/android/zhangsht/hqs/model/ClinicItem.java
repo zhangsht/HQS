@@ -7,16 +7,14 @@ package com.study.android.zhangsht.hqs.model;
 public class ClinicItem {
     private String clinicName;
     private String doctorName;
-    private String inTreatName;
-    private String waitTreatNames;
-    private String afterTreatNames;
 
-    public ClinicItem(String clinicName, String doctorName, String inTreatName, String waitTreatName, String afterTreatNames) {
+    public ClinicItem(String clinicName, String doctorName) {
         this.clinicName = clinicName;
         this.doctorName = doctorName;
-        this.inTreatName = inTreatName;
-        this.waitTreatNames = waitTreatName;
-        this.afterTreatNames = afterTreatNames;
+    }
+
+    public String display() {
+        return this.clinicName + this.doctorName;
     }
 
     public String getClinicName() {
@@ -33,29 +31,5 @@ public class ClinicItem {
 
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
-    }
-
-    public String getInTreatName() {
-        return inTreatName;
-    }
-
-    public void setInTreatName(String inTreatName) {
-        this.inTreatName = inTreatName;
-    }
-
-    public String getWaitTreatNames() {
-        return waitTreatNames;
-    }
-
-    public void setWaitTreatNames(String waitTreatName) {
-        this.waitTreatNames = waitTreatName;
-    }
-
-    public String getAfterTreatNames() {
-        return afterTreatNames;
-    }
-
-    public void setAfterTreatNames(String afterTreatNames) {
-        this.afterTreatNames = afterTreatNames;
     }
 }

@@ -1,7 +1,7 @@
 package com.iQueue.model;
 
 public class Office {
-	private String oId;
+	private String o_id;
 	private String name;
 	private String firTreatId;
 	private String secTreatId;
@@ -15,10 +15,10 @@ public class Office {
 	}
 	
 	public String getoId() {
-		return oId;
+		return o_id;
 	}
 	public void setoId(String oId) {
-		this.oId = oId;
+		this.o_id = oId;
 	}
 	public String getSecTreatId() {
 		return secTreatId;

@@ -1,6 +1,7 @@
 package com.study.android.zhangsht.hqs.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -135,11 +136,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (status.equals("success")) {
+            SharedPreferences sp = getSharedPreferences("iQueue", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("officeId", officeId);
+            editor.commit();//提交修改
+
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra("status", "login");
-            intent.putExtra("officeId", officeId);
+            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             startActivity(intent);
-            finish();
         } else {
             Toast.makeText(LoginActivity.this, status, Toast.LENGTH_SHORT).show();
         }

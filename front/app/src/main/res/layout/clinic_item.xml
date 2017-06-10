@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content" />
-    <TextView
+    <!--<TextView
         android:id="@+id/inTreatName"
         android:text="小明"
         android:textStyle="bold"
@@ -39,5 +39,5 @@
         android:textSize="18sp"
         android:layout_width="0dp"
         android:layout_weight="2"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
 </LinearLayout>

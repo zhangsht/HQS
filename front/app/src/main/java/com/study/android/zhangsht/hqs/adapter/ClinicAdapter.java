@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.study.android.zhangsht.hqs.R;
-import com.study.android.zhangsht.hqs.model.ClinicItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,14 +19,14 @@ import java.util.Collections;
  */
 
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicViewHolder> {
-    private ArrayList<ClinicItem> list;
+    private ArrayList<String> list;
     private Context context;
 
     private OnRecyclerViewItemClickListener onItemClickListener;//点击的接口
     private OnRecyclerViewItemLongClickListener onItemLongClickListener;//长按的接口
     private OnItemTouchListener onItemTouchListener;
 
-    public ClinicAdapter(ArrayList<ClinicItem> list, Context context) {
+    public ClinicAdapter(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -43,16 +42,16 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
     public class ClinicViewHolder extends RecyclerView.ViewHolder {
         TextView clinicName;
         TextView doctorName;
-        TextView inTreatName;
-        TextView waitTreatNames;
+        /*TextView inTreatName;
+        TextView waitTreatNames;*/
 
         public ClinicViewHolder(View itemView) {
             super(itemView);
 
             clinicName = (TextView) itemView.findViewById(R.id.clinicName);
             doctorName = (TextView) itemView.findViewById(R.id.doctorName);
-            inTreatName = (TextView) itemView.findViewById(R.id.inTreatName);
-            waitTreatNames = (TextView) itemView.findViewById(R.id.waitTreatNames);
+            /*inTreatName = (TextView) itemView.findViewById(R.id.inTreatName);
+            waitTreatNames = (TextView) itemView.findViewById(R.id.waitTreatNames);*/
         }
 
         /**
@@ -71,12 +70,13 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
 
     @Override
     public void onBindViewHolder(final ClinicViewHolder holder, final int position) {
-        ClinicItem clinicItem = list.get(position);
+        String item = list.get(position);
         //控件中设置值
-        holder.clinicName.setText(clinicItem.getClinicName());
-        holder.doctorName.setText(clinicItem.getDoctorName());
-        holder.inTreatName.setText(clinicItem.getInTreatName());
-        holder.waitTreatNames.setText(clinicItem.getWaitTreatNames());
+        String [] arr = item.split(" ");
+        holder.clinicName.setText(arr[0]);
+        holder.doctorName.setText(arr[1]);
+        /*holder.inTreatName.setText(clinicItem.getInTreatName());
+        holder.waitTreatNames.setText(clinicItem.getWaitTreatNames());*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

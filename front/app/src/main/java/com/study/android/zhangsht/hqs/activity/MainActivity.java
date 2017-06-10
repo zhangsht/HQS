@@ -1,6 +1,6 @@
 package com.study.android.zhangsht.hqs.activity;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,63 +17,67 @@ import com.study.android.zhangsht.hqs.R;
 import com.study.android.zhangsht.hqs.fragment.HomeFragment;
 import com.study.android.zhangsht.hqs.fragment.OfficeFragment;
 import com.study.android.zhangsht.hqs.fragment.QueueFragment;
+import com.study.android.zhangsht.hqs.model.ClinicItem;
 import com.study.android.zhangsht.hqs.utils.HttpCallbackListener;
 import com.study.android.zhangsht.hqs.utils.HttpTool;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     private Fragment officeFragment, queueFragment, homeFragment;
     private Fragment currentFragment;
 
-    private String officeId;
-
     private MyHandler handler;
+    String officeName = "";
+
+    List<ClinicItem> clinicList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        clinicList = new ArrayList<>();
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        handler = new MyHandler();
 
-        init();
+        initOffice();
+    }
 
+    private void initFragment() {
+
+        Bundle bundle = new Bundle();
+        for (int i = 0; i < clinicList.size(); i++) {
+            bundle.putString("clinic" + i, clinicList.get(i).getClinicName() + " " +
+                    clinicList.get(i).getDoctorName());
+        }
+        bundle.putInt("size", clinicList.size());
+        bundle.putString("officeName", officeName);
+        officeFragment = new OfficeFragment();
+        officeFragment.setArguments(bundle);
+        homeFragment = new HomeFragment();
+        queueFragment = new QueueFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.fragment_container, officeFragment).commit();
         currentFragment = officeFragment;
-
-        Intent intent = getIntent();
-        if (intent != null) {
-            String status = intent.getStringExtra("status");
-            if (status != null) {
-                officeId = intent.getStringExtra("officeId");
-                if (status.equals("login")) {
-                    Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-                    initOffice();
-                } else if (status.equals("register")) {
-                    Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                    initOffice();
-                }
-                Toast.makeText(this, officeId, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void init() {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        officeFragment = new OfficeFragment();
-        homeFragment = new HomeFragment();
-        queueFragment = new QueueFragment();
-        handler = new MyHandler();
     }
 
     private void initOffice() {
-        String url = "http://192.168.137.1:8080/iQueue/initData";
+        String url = "http://192.168.137.1:8080/iQueue/getClinicList";
+        SharedPreferences sp = getSharedPreferences("iQueue", MODE_PRIVATE);
+        String officeId = sp.getString("officeId", "");
+        if (officeId.equals("")) {
+            Toast.makeText(this, "科室信息不存在", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
-            String params = "opcode=" + URLEncoder.encode("initData", "UTF-8") +
+            String params = "opcode=" + URLEncoder.encode("getClinicList", "UTF-8") +
                     "&officeId=" + URLEncoder.encode(officeId, "UTF-8");
 
             HttpTool.sendRequest(url, params, new HttpCallbackListener() {
@@ -105,26 +109,37 @@ public class MainActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 0:
                     String response = (String) msg.obj;
-                    String office = "";
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
-                        office = jsonObject.getString("office");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    //String office = parseItemJSONWithJSONObject(response);
-                    Toast.makeText(MainActivity.this, office, Toast.LENGTH_LONG).show();
-                   /* if (status.equals("success")) {
-
-                    } else {
-                        Toast.makeText(MainActivity.this, status, Toast.LENGTH_SHORT).show();
-                    }*/
+                    initClinicList(response);
+                    initFragment();
                     break;
             }
         }
     }
 
+    private void initClinicList(String response) {
+        String status = "";
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            status = jsonObject.getString("status");
+            officeName = jsonObject.getString("officeName");
+            JSONArray jsonArray = jsonObject.getJSONArray("clinicList");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject clinic = jsonArray.getJSONObject(i);
+                String name = clinic.getString("name");
+                String doctorName = clinic.getString("doctorName");
+                ClinicItem item = new ClinicItem(name, doctorName);
+                clinicList.add(item);
+                Log.i("getClinicList",  officeName + item.display());
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "响应解析失败", Toast.LENGTH_SHORT).show();
+        }
+
+        if (status.equals("success")) {
+            Log.i("getClinicList",  officeName + clinicList.toString());
+        }
+    }
     private String parseItemJSONWithJSONObject(String jsonData) {
         String office = null;
         try {

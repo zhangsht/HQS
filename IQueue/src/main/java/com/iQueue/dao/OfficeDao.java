@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.iQueue.model.Office;
+import com.iQueue.model.User;
 import com.iQueue.service.DataSourceUtills;
 
 public class OfficeDao implements OfficeDaoImp {
@@ -50,6 +51,13 @@ public class OfficeDao implements OfficeDaoImp {
 			return null;
 		}
 		return items.get(0);
+	}
+	
+	
+	public String getOfficeName(String officeId) {
+		String sql = "select * from office where o_id = ?";
+		Office office = jdbcTemplate.queryForObject(sql, BeanPropertyRowMapper.newInstance(Office.class), officeId);
+		return office.getName();
 	}
 
 	/*
