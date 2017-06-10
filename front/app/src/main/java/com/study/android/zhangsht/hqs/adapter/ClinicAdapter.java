@@ -27,50 +27,6 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
     private OnRecyclerViewItemLongClickListener onItemLongClickListener;//长按的接口
     private OnItemTouchListener onItemTouchListener;
 
-    /*
-    暴露出去的点击事件的方法
-     */
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    /*
-    点击要实现的接口
-     */
-    public interface OnRecyclerViewItemClickListener{
-        //接口中实现具体操作的抽象方法
-        public abstract void OnItemClick(int itemPosition);
-    }
-
-    /*
-    暴露出去的长按事件的方法
-     */
-    public void setOnItemLongClickListener(OnRecyclerViewItemLongClickListener onItemLongClickListener){
-        this.onItemLongClickListener = onItemLongClickListener;
-    }
-
-    /*
-   暴露出去的点击事件的方法
-    */
-    public void setOnItemTouchListener(OnItemTouchListener onItemTouchListener){
-        this.onItemTouchListener = onItemTouchListener;
-    }
-
-    /*
-    点击要实现的接口
-     */
-    public interface OnItemTouchListener{
-        public void OnItemTouch(MotionEvent event, ClinicViewHolder holder);
-    }
-
-    /*
-    长按要实现的接口
-     */
-    public interface OnRecyclerViewItemLongClickListener{
-        //接口中实现具体操作的抽象方法
-        public abstract void OnItemLongClick(int itemPosition);
-    }
-
     public ClinicAdapter(ArrayList<ClinicItem> list, Context context) {
         this.list = list;
         this.context = context;
@@ -137,13 +93,13 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
             }
         });*/
 
-        holder.waitTreatNames.setOnTouchListener(new View.OnTouchListener() {
+       /* holder.waitTreatNames.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 onItemTouchListener.OnItemTouch(event, holder);
                 return false;
             }
-        });
+        });*/
     }
 
     @Override
@@ -168,5 +124,49 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
     public void onItemDismiss(int position) {
         list.remove(position);
         notifyItemRemoved(position);
+    }
+
+    /*
+   暴露出去的点击事件的方法
+    */
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    /*
+    点击要实现的接口
+     */
+    public interface OnRecyclerViewItemClickListener {
+        //接口中实现具体操作的抽象方法
+        public abstract void OnItemClick(int itemPosition);
+    }
+
+    /*
+    暴露出去的长按事件的方法
+     */
+    public void setOnItemLongClickListener(OnRecyclerViewItemLongClickListener onItemLongClickListener){
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
+    /*
+  长按要实现的接口
+   */
+    public interface OnRecyclerViewItemLongClickListener{
+        //接口中实现具体操作的抽象方法
+        public abstract void OnItemLongClick(int itemPosition);
+    }
+
+    /*
+   暴露出去的点击事件的方法
+    */
+    public void setOnItemTouchListener(OnItemTouchListener onItemTouchListener){
+        this.onItemTouchListener = onItemTouchListener;
+    }
+
+    /*
+    点击要实现的接口
+     */
+    public interface OnItemTouchListener{
+        public void OnItemTouch(MotionEvent event, ClinicViewHolder holder);
     }
 }

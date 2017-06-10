@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,7 +15,6 @@ import com.study.android.zhangsht.hqs.R;
 import com.study.android.zhangsht.hqs.activity.MyClinic;
 import com.study.android.zhangsht.hqs.adapter.ClinicAdapter;
 import com.study.android.zhangsht.hqs.model.ClinicItem;
-import com.study.android.zhangsht.hqs.utils.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
 
@@ -47,7 +43,7 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
 
         ClinicAdapter adapter = new ClinicAdapter(list, activity);
 
-        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+        /*final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         //itemTouchHelper与RecyclerView关联
         itemTouchHelper.attachToRecyclerView(recyclerView);
         //设置ImgView的触摸监听事件
@@ -60,7 +56,7 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
                     itemTouchHelper.startDrag(holder);
                 }
             }
-        });
+        });*/
         adapter.setOnItemClickListener(new ClinicAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void OnItemClick(int itemPosition) {

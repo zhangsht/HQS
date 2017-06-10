@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import java.net.URLEncoder;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextInputLayout nameLayout;
+    private TextInputLayout passwordLayout;
     private EditText username;
     private EditText password;
 
@@ -36,6 +39,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
+        nameLayout = (TextInputLayout)findViewById(R.id.nameLayout);
+        passwordLayout = (TextInputLayout)findViewById(R.id.passwordLayout);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -52,12 +57,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.sign_up:
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
-                finish();
                 break;
         }
     }
 
     private void login() {
+        String nameText = username.getText().toString().trim();
+        String passwordText = password.getText().toString().trim();
+        if (nameText.length() == 0) {
+            nameLayout.setError("用户名为空");
+            return;
+        }
+        nameLayout.setError(null);
+
+        if (passwordText.length() == 0) {
+            passwordLayout.setError("密码为空");
+            return;
+        }
+
+
+        passwordLayout.setError(null);
+
+
         String url = "http://192.168.137.1:8080/iQueue/user";
         try {
             String params = "opcode=" + URLEncoder.encode("login", "UTF-8") +
