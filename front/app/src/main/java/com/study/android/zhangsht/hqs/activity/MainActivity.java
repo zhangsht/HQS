@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment currentFragment;
 
     private MyHandler handler;
-    String officeName = "";
+    private String officeName = "";
 
     List<ClinicItem> clinicList;
 
@@ -139,39 +139,6 @@ public class MainActivity extends AppCompatActivity {
         if (status.equals("success")) {
             Log.i("getClinicList",  officeName + clinicList.toString());
         }
-    }
-    private String parseItemJSONWithJSONObject(String jsonData) {
-        String office = null;
-        try {
-            JSONObject jsonObject = new JSONObject(jsonData);
-            //第二步：因为单条数据，所以用jsonObject.getString方法直接取出对应键值
-            office = jsonObject.getString("office");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return office == null ? "" : office;
-
-
-        /*StringBuffer sb =new StringBuffer();
-        try {
-            //第一步：将从网络字符串jsonData字符串装入JSONObject，即JSONObject
-            JSONObject jsonObject = new JSONObject(jsonData);
-            //第二步：因为多条数据，所以将"取出来的、要遍历的"字段装入JSONArray（这里要遍历data字段）
-            JSONArray jsonArray = jsonObject.getJSONArray("data");
-            //第三步：循环遍历，依次取出JSONObject对象
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-                String time = jsonObject2.getString("time");
-                String ftime = jsonObject2.getString("ftime");
-                String context = jsonObject2.getString("context");
-                sb.append("time: " + time+"  "+"ftime: " + ftime+"\n"+"context: " + context+"\n\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sb.toString();*/
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

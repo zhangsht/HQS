@@ -67,6 +67,9 @@ public class LoginController {
 		String opcode = request.getParameter("opcode");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		System.out.println("usrname is :" + username + " " + password);
+		System.out.println("opcode is " + opcode);
+
 		UserDao userDao = new UserDao();
 		User user = new User();
 		System.out.println(opcode);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,40 +23,61 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_my_clinic" />-->
-    <LinearLayout
+    <RelativeLayout
+        android:background="#EEEEE0"
         android:id="@+id/linearLayout"
+        android:padding="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <TextView
+            android:id="@+id/clinicTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="诊室: "
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/clinicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/clinicTitle"
+            android:layout_alignBaseline="@+id/clinicTitle"
             android:text="诊室01"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_toRightOf="@+id/clinicText"
+            android:id="@+id/doctorTitle"
+            android:paddingLeft="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="医生: "
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/docText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="医生李峰"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/myClinicVP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.v4.view.PagerTabStrip
-                android:id="@+id/pagertab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </android.support.v4.view.ViewPager>
-    </LinearLayout>
+            android:layout_alignBaseline="@id/doctorTitle"
+            android:layout_toRightOf="@+id/doctorTitle"
+            android:text="李峰"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myClinicVP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pagertab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -67,8 +88,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/logo"
         app:backgroundTint="@color/colorPrimary"
-        app:pressedTranslationZ="16dp"
         app:elevation="6dp"
+        app:pressedTranslationZ="16dp"
         app:rippleColor="@color/colorAccent" />
 
-</RelativeLayout>
+</LinearLayout>

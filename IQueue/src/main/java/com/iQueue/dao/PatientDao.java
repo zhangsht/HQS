@@ -2,7 +2,9 @@ package com.iQueue.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -36,6 +38,22 @@ public class PatientDao implements PatientDaoImp {
 		String SQL = "select name, arriveTime from patientInfo where qId = ? order by arriveTime desc limit 2";
 		List<PatientInfo> items = jdbcTemplate.query(SQL, new Object[] { queueId }, new QueueMapper());
 		return items;
+	}
+
+	public List<Map<String, Object>> getAllPatient() {
+		String sql = "select * from patientInfo";
+		List<Map<String, Object>> items1 = new ArrayList<Map<String, Object>>();
+		items1 = jdbcTemplate.queryForList(sql);
+
+		String sql2 = "select * from signinfo";
+		List<Map<String, Object>> items2 = new ArrayList<Map<String, Object>>();
+		items2 = jdbcTemplate.queryForList(sql2);
+		List<Map<String, Object>> itemsList = new ArrayList<Map<String, Object>>();
+		for (int i = 0; i < items1.size() && i < items2.size(); i++) {
+			itemsList.add(items1.get(i));
+			itemsList.add(items2.get(i));
+		}
+		return itemsList;
 	}
 
 	public void insert(PatientInfo pf, SignInfo sf) {

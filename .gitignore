@@ -12,6 +12,7 @@
 bin/
 gen/
 out/
+pom.xml
 
 # Gradle files
 .gradle/

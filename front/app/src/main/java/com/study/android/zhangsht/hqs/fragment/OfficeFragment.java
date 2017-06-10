@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.study.android.zhangsht.hqs.R;
 import com.study.android.zhangsht.hqs.activity.MyClinic;
 import com.study.android.zhangsht.hqs.adapter.ClinicAdapter;
+import com.study.android.zhangsht.hqs.utils.ItemTouchHelperCallback;
 
 import java.util.ArrayList;
 
@@ -38,9 +40,10 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
         for (int i = 0; i < size; i++) {
             list.add(bundle.getString("clinic" + i));
         }
+
         View contentView = inflater.inflate(R.layout.fragment_office, container, false);
-        TextView officeText = (TextView)container.findViewById(R.id.officeName);
-        officeText.setText(officeName);
+        TextView officeText = (TextView)contentView.findViewById(R.id.officeName);
+        officeText.setText("科室: " + officeName);
 
         recyclerView = (RecyclerView) contentView.findViewById(R.id.clinicList);
         final FragmentActivity activity = getActivity();
@@ -49,12 +52,11 @@ public class OfficeFragment extends Fragment implements View.OnClickListener {
 
         ClinicAdapter adapter = new ClinicAdapter(list, activity);
 
-        /*final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
+        final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(adapter));
         //itemTouchHelper与RecyclerView关联
         itemTouchHelper.attachToRecyclerView(recyclerView);
         //设置ImgView的触摸监听事件
-        adapter.setOnItemTouchListener(new ClinicAdapter.OnItemTouchListener() {
-
+        /*adapter.setOnItemTouchListener(new ClinicAdapter.OnItemTouchListener() {
             @Override
             public void OnItemTouch(MotionEvent event, ClinicAdapter.ClinicViewHolder holder) {
                 if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {

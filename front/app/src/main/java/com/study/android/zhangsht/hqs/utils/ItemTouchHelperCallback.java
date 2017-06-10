@@ -1,9 +1,7 @@
 package com.study.android.zhangsht.hqs.utils;
 
 import android.graphics.Canvas;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.study.android.zhangsht.hqs.adapter.ClinicAdapter;
@@ -29,23 +27,23 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     /**
      * RecyclerView item支持长按进入拖动操作
      */
-    @Override
+   /* @Override
     public boolean isLongPressDragEnabled() {
         return true;
-    }
+    }*/
 
     /**
      * RecyclerView item任意位置触发启用滑动操作
      */
-    @Override
+    /*@Override
     public boolean isItemViewSwipeEnabled() {
         return true;
-    }
+    }*/
 
     /**
      * 指定可以支持的拖动和滑动的方向，上下为拖动（drag），左右为滑动（swipe）
      */
-    @Override
+    /*@Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         if (recyclerView.getLayoutManager() instanceof GridLayoutManager || recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
             final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
@@ -57,12 +55,12 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
             final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
             return makeMovementFlags(dragFlags, swipeFlags);
         }
-    }
+    }*/
 
     /**
      * 拖动操作会执行的方法
      */
-    @Override
+   /* @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         //判断如果viewHolder类型不一样，返回False
         if (viewHolder.getItemViewType() != target.getItemViewType()) {
@@ -71,15 +69,30 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         //通知适配器改变数据 以及刷新
         clinicAdapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
         return true;
-    }
+    }*/
 
     /**
      * 滑动操作会执行的方法
      */
-    @Override
+    /*@Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         //通知适配器删除数据 以及刷新
         clinicAdapter.onItemDismiss(viewHolder.getAdapterPosition());
+    }*/
+
+    @Override
+    public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        return 0;
+    }
+
+    @Override
+    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+        return false;
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
     }
 
     /**

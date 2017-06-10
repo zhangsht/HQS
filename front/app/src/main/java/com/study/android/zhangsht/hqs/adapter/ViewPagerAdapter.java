@@ -1,6 +1,11 @@
 package com.study.android.zhangsht.hqs.adapter;
 
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -42,6 +47,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titleList.get(position);
+        SpannableStringBuilder ssb = new SpannableStringBuilder("  "+titleList.get(position)); // space added before text
+
+
+        ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(67, 110, 238));
+        ssb.setSpan(fcs, 1, ssb.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);// 设置字体颜色
+        ssb.setSpan(new RelativeSizeSpan(1.2f), 1, ssb.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return ssb;
     }
 }

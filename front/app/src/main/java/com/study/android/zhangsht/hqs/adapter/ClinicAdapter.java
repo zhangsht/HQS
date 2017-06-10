@@ -58,13 +58,13 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicView
          * 操作开始时调用的方法
          */
         public void onItemSelected() {
-            itemView.setBackgroundColor(Color.GRAY);
+            itemView.setBackgroundColor(Color.parseColor("#e5c77f"));
         }
         /**
          * 操作完成后调用的方法
          */
         public void onItemNormal() {
-            itemView.setBackgroundColor(0);
+            itemView.setBackgroundColor(Color.parseColor("#eed"));
         }
     }
 

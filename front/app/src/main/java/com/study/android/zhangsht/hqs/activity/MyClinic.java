@@ -4,12 +4,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.study.android.zhangsht.hqs.R;
@@ -22,19 +25,17 @@ public class MyClinic extends AppCompatActivity {
     private ViewPager viewPager;
     private List<View> viewList;
     private List<String> titleList;
+    private TextView clinicText;
+    private TextView docText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_clinic);
-        Bundle extras = getIntent().getExtras();
-        String doctorInfo = extras.getString("doctorInfo");
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("诊室01");
+        toolbar.setTitle("诊室");
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setSubtitle("李峰");
         toolbar.setSubtitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
 
@@ -46,6 +47,15 @@ public class MyClinic extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        String doctorInfo = extras.getString("doctorInfo");
+        Log.i("doctorInfo", doctorInfo);
+        clinicText = (TextView)findViewById(R.id.clinicText);
+        docText = (TextView)findViewById(R.id.docText);
+        String []arr = doctorInfo.split(" ");
+        clinicText.setText(arr[0]);
+        docText.setText(arr[1]);
 
         viewPager = (ViewPager) findViewById(R.id.myClinicVP);
         viewList = new ArrayList<>();
@@ -61,6 +71,9 @@ public class MyClinic extends AppCompatActivity {
         titleList.add("完诊");
         ViewPagerAdapter adapter = new ViewPagerAdapter(viewList, titleList);
         viewPager.setAdapter(adapter);
+
+        PagerTabStrip pagerTabStrip = (PagerTabStrip) findViewById(R.id.pagertab);
+        pagerTabStrip.setTabIndicatorColor(Color.parseColor("#00008B"));
     }
 
     @Override

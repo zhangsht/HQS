@@ -49,7 +49,7 @@ public class OfficeController {
 		return modelMap;
 	}
 
-	@RequestMapping(value = "/addPatient", method = RequestMethod.POST)
+	@RequestMapping(value = "/oldAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> addPatient(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String opcode = request.getParameter("opcode");
@@ -77,7 +77,7 @@ public class OfficeController {
 		modelMap.put("opcode", "add");
 		if (opcode.equals("add")) {
 			String pId = request.getParameter("pId");
-			String qId = request.getParameter("qId");
+			//String qId = request.getParameter("qId");
 			String name = request.getParameter("name");
 			System.out.println("name is " + name);
 			String cardNumber = request.getParameter("cardNumber");
@@ -95,16 +95,36 @@ public class OfficeController {
 			String bloodSugar = request.getParameter("bloodSugar");
 			String description = request.getParameter("description");
 
-			PatientInfo patientInfo = new PatientInfo(pId, name, cardNumber, sex, age, registerTime, arriveTime, qId);
+			PatientInfo patientInfo = new PatientInfo(pId, name, cardNumber, sex, age, registerTime, arriveTime, "123");
 			SignInfo signInfo = new SignInfo(pId, height, weight, temperature, respiration, pulse,
 					bloodPressure, bloodSugar, description);
 			PatientDao patientDao = new PatientDao();
 			patientDao.insert(patientInfo, signInfo);
 			modelMap.put("status", "success");
+			modelMap.put("patientInfo", patientInfo);
+			modelMap.put("signInfo", signInfo);
 		} else {
 			modelMap.put("status", "fail");
 		}
 		
+		return modelMap;
+	}
+	
+	@RequestMapping(value = "/initPatientInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> initPatientInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String opcode = request.getParameter("opcode");
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		modelMap.put("opcode", "initPatientInfo");
+		if (opcode.equals("initPatientInfo")) {
+			PatientDao patientDao = new PatientDao();
+			List<Map<String, Object>> datasList = patientDao.getAllPatient();
+			modelMap.put("patientInfo", datasList);
+			modelMap.put("status", "success");
+		} else {
+			modelMap.put("status", "fail");
+		}
+		;
 		return modelMap;
 	}
 
@@ -143,9 +163,9 @@ public class OfficeController {
 				List<PatientInfo> firTreatList = patientDao.getQueues(firTreatId);
 				List<PatientInfo> secTreatList = patientDao.getQueues(secTreatId);
 				List<PatientInfo> dispatchTreatList = patientDao.getQueues(dispatchTreatId);
-				modelMap.put("firTreat", firTreatList);
-				modelMap.put("secTreat", secTreatList);
-				modelMap.put("dispatchTreat", dispatchTreatList);
+				modelMap.put("firstQueue", firTreatList);
+				modelMap.put("secondQueue", secTreatList);
+				modelMap.put("triageQueue", dispatchTreatList);
 			} else {
 				modelMap.put("status", "fail");
 			}
