@@ -22,7 +22,7 @@ import com.iQueue.model.Queue;
 public class ClinicController {
 	@RequestMapping(value="/clinicDetail", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> initOffice(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, Object> clinicDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String opcode = request.getParameter("opcode");
 		String clinicId = request.getParameter("clinicId");
 		Map<String, Object> modelMap = new HashMap<String, Object>();
