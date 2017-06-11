@@ -37,6 +37,14 @@ public class DoctorDao implements DoctorDaoImp {
 			return doctorInfo;
 		}
 	}
+	
+	private static final class NameInfoMapper implements RowMapper<DoctorInfo> {
+		public DoctorInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			DoctorInfo doctorInfo = new DoctorInfo();
+			doctorInfo.setName(rs.getString("name"));
+			return doctorInfo;
+		}
+	}
 
 	public DoctorInfo getDoctorInfo(String clinicId) {
 		String SQL = "select * from doctorinfo where cId = ?";
@@ -45,5 +53,30 @@ public class DoctorDao implements DoctorDaoImp {
 			return null;
 		}
 		return items.get(0);
+	}
+
+	public void updateInfo(String clinicId, String doctorName, String profile, String startTime, String endTime) {
+		String sql = "update doctorinfo set name = ?, profile = ?, startTime = ?, endTime = ? "
+				+ "where cId = ?";
+		jdbcTemplate.update(sql, doctorName, profile, startTime, endTime, clinicId);
+	}
+
+	public String queryQueueInfo(String qId) {
+		String SQL = "select * from doctorinfo where preTreatId = ?";
+		List<DoctorInfo> items = jdbcTemplate.query(SQL, new Object[] { qId }, new DoctorInfoMapper());
+		if (items != null && items.size() > 0) {
+			return "doctorName: " + items.get(0).getName() + " 队列: " + "候诊队列";
+		}
+		String SQL1 = "select * from doctorinfo where inTreatId = ?";
+		List<DoctorInfo> items1 = jdbcTemplate.query(SQL1, new Object[] { qId }, new DoctorInfoMapper());
+		if (items1 != null && items.size() > 0) {
+			return "doctorName: " + items1.get(0).getName() + " 队列: " + "就诊队列";
+		}
+		String SQL2 = "select * from doctorinfo where afterTreatId = ?";
+		List<DoctorInfo> items2 = jdbcTemplate.query(SQL2, new Object[] { qId }, new DoctorInfoMapper());
+		if (items2 != null && items.size() > 0) {
+			return "doctorName: " + items2.get(0).getName() + " 队列: " + "完诊队列";
+		}
+		return "null";
 	}
 }

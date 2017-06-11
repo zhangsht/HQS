@@ -41,4 +41,9 @@ public class ClinicDao implements ClinicDaoImp {
 		return items;
 	}
 
+	public void updateName(String clinicId, String clinicName) {
+		String sql = "update clinic set name = ? where cId = ?";
+		jdbcTemplate.update(sql, clinicName, clinicId);
+	}
+
 }

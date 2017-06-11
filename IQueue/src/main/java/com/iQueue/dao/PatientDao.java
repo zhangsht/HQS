@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.RowSet;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.iQueue.model.PatientInfo;
 import com.iQueue.model.SignInfo;
+import com.iQueue.model.User;
 import com.iQueue.service.DataSourceUtills;
 
 public class PatientDao implements PatientDaoImp {
@@ -30,6 +34,14 @@ public class PatientDao implements PatientDaoImp {
 			PatientInfo patientInfo = new PatientInfo();
 			patientInfo.setName(rs.getString("name"));
 			patientInfo.setArriveTime(rs.getString("arriveTime"));
+			return patientInfo;
+		}
+	}
+	
+	private static final class QueueIdMapper implements RowMapper<PatientInfo> {
+		public PatientInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			PatientInfo patientInfo = new PatientInfo();
+			patientInfo.setqId(rs.getString("qId"));
 			return patientInfo;
 		}
 	}
@@ -76,6 +88,30 @@ public class PatientDao implements PatientDaoImp {
 		jdbcTemplate.update(sql, newQueueId, name);
 	}
 
+	public String checkInfo(String pId, String name) {
+		String SQL = "select qId from patientInfo where pId = ? or name = ?";
+		List<PatientInfo> items = jdbcTemplate.query(SQL, new Object[] { pId, name }, new QueueIdMapper());
+		if (items.isEmpty()) {
+			return "null";
+		}
+		String qId = items.get(0).getqId();
+		
+		String result = "officeInfo: ";
+		OfficeDao officeDao = new OfficeDao();
+		String officeInfo = officeDao.queryQueueInfo(qId);
+		if (officeInfo != null) {
+			result += officeInfo;
+		}
+		
+		result += ", doctorInfo: ";
+		DoctorDao doctorDao = new DoctorDao();
+		String doctorInfo = doctorDao.queryQueueInfo(qId);
+		if (doctorInfo != null) {
+			result += doctorInfo;
+		}
+		return result;
+	}
+
 	public void delete(String id) {
 		// TODO Auto-generated method stub
 
@@ -95,5 +131,4 @@ public class PatientDao implements PatientDaoImp {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
