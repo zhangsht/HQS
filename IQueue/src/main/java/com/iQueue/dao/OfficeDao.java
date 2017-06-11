@@ -39,14 +39,6 @@ public class OfficeDao implements OfficeDaoImp {
 		}
 	}
 
-	private static final class NameMapper implements RowMapper<Office> {
-		public Office mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Office office = new Office();
-			office.setName(rs.getString("name"));
-			return office;
-		}
-	}
-
 	public Office getOffice(String officeId) {
 		String SQL = "select * from office where o_id = ?";
 		List<Office> items = jdbcTemplate.query(SQL, new Object[] { officeId }, new OfficeMapper());

@@ -131,4 +131,14 @@ public class PatientDao implements PatientDaoImp {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void deleteOverTime(String endTime) {
+		String sql = "delete from patientInfo where arriveTime >= ?";
+		jdbcTemplate.update(sql, endTime);
+	}
+
+	public void updateQueue(String preTreatId, String pId) {
+		String sql = "update patientInfo set qId = ? where pId =?";
+		jdbcTemplate.update(sql, preTreatId, pId);
+	}
 }

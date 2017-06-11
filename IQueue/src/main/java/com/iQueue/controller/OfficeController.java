@@ -1,11 +1,9 @@
 package com.iQueue.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +24,30 @@ import com.iQueue.model.SignInfo;
 
 @Controller
 public class OfficeController {
+	@RequestMapping(value = "/choiceDoctor", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> choiceDoctor(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		try {
+			String opcode = request.getParameter("opcode");
+			if (opcode.equals("choiceDoctor")) {
+				String clinicId = request.getParameter("clinicId");
+				String pId = request.getParameter("pId");
+				DoctorDao doctorDao = new DoctorDao();
+				DoctorInfo doctorInfo = doctorDao.getDoctorInfo(clinicId);
+				if (doctorInfo != null) {
+					PatientDao patientDao = new PatientDao();
+					patientDao.updateQueue(doctorInfo.getPreTreatId(), pId);
+				}
+				modelMap.put("status", "success");
+			} else {
+				modelMap.put("status", "fail");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return modelMap;
+	}
 	@RequestMapping(value = "/getClinicList", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> initOffice(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,27 +73,6 @@ public class OfficeController {
 		return modelMap;
 	}
 
-	@RequestMapping(value = "/oldAdd", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> addPatient(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		try {
-			String opcode = request.getParameter("opcode");
-			String officeId = request.getParameter("officeId");
-			if (opcode.equals("addPatient")) {
-				modelMap.put("status", "success");
-				ClinicDao clinicDao = new ClinicDao();
-				List<Clinic> clinicList = clinicDao.getClinics(officeId);
-				System.out.println(clinicList.size());
-				modelMap.put("clinicList", clinicList);
-			} else {
-				modelMap.put("status", "fail");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return modelMap;
-	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
@@ -189,7 +190,6 @@ public class OfficeController {
 		}
 		return modelMap;
 	}
-	
 	
 	@RequestMapping(value = "/updateOfficeInfo", method = RequestMethod.POST)
 	@ResponseBody

@@ -1,5 +1,7 @@
 package com.iQueue.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,6 @@ import com.iQueue.dao.DoctorDao;
 import com.iQueue.dao.PatientDao;
 import com.iQueue.model.DoctorInfo;
 import com.iQueue.model.PatientInfo;
-import com.iQueue.model.Queue;
 
 @Controller
 public class ClinicController {
@@ -84,6 +85,35 @@ public class ClinicController {
 				modelMap.put("status", "fail");
 			}
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return modelMap;
+	}
+	
+	@RequestMapping(value="/deleteOvertime", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteOvertime(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		try {
+			String opcode = request.getParameter("opcode");
+			if (opcode.equals("deleteOvertime")) {
+				String clinicId = request.getParameter("clinicId");
+				DoctorDao doctorDao = new DoctorDao();
+				Date d = new Date();  
+		        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+		        String endTime = sdf.format(d);
+		        endTime += " ";
+		        DoctorInfo doctorInfo = doctorDao.getDoctorInfo(clinicId);
+		        if (doctorInfo != null) {
+		        	endTime += doctorInfo.getEndTime();
+		        }
+				PatientDao patientDao = new PatientDao();
+				patientDao.deleteOverTime(endTime);
+				modelMap.put("status", "success");
+			} else {
+				modelMap.put("status", "fail");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

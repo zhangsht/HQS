@@ -13,7 +13,10 @@
 		"3e8d5075-b217-ab22-c698-a4e429f59dc8",
 		"ed07529b-d5e5-06a5-cc76-29679eac6e98",
 		"e19a8b44-054f-00ce-0d19-5a979a00d03e",
-		"f910cba0-3215-f087-e2c8-b413c3d2ac22"
+		"f910cba0-3215-f087-e2c8-b413c3d2ac22",
+		"e693c186-4953-a28a-8020-033dd1fbeb1d",
+		"5d404dce-d698-4c79-e089-73eef942a50e",
+		"d3028d4f-fb5e-cc90-8df7-c294fa888ceb"
 	],
 	"folders": [],
 	"timestamp": 1496674102869,
@@ -145,6 +148,44 @@
 			"description": "",
 			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
 			"responses": []
+		},
+		{
+			"id": "5d404dce-d698-4c79-e089-73eef942a50e",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/deleteOvertime?opcode=deleteOvertime&clinicId=ks303",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "deleteOvertime",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "clinicId",
+					"value": "ks303",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"data": null,
+			"dataMode": "params",
+			"name": "localhost:8080/iQueue/deleteOvertime?opcode=deleteOvertime&clinicId=ks303",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1497160165562,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
 		},
 		{
 			"id": "78182378-d92d-39fb-b0b0-eb783a7e4354",
@@ -333,6 +374,49 @@
 			"responses": []
 		},
 		{
+			"id": "d3028d4f-fb5e-cc90-8df7-c294fa888ceb",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/choiceDoctor?opcode=choiceDoctor&clinicId=ks303&pId=patient011",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "choiceDoctor",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "clinicId",
+					"value": "ks303",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pId",
+					"value": "patient011",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497160812812,
+			"name": "localhost:8080/iQueue/choiceDoctor?opcode=choiceDoctor&clinicId=ks303&pId=patient011",
+			"description": "",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"responses": []
+		},
+		{
 			"id": "d61835e6-90fb-8437-ed59-ba5978756546",
 			"headers": "",
 			"headerData": [],
@@ -445,6 +529,49 @@
 			"helperAttributes": {},
 			"time": 1497147610906,
 			"name": "localhost:8080/iQueue/updateOfficeInfo?opcode=updateOfficeInfo&officeId=guke8765&newName=fuck",
+			"description": "",
+			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
+			"responses": []
+		},
+		{
+			"id": "e693c186-4953-a28a-8020-033dd1fbeb1d",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/iQueue/checkPatientQueue?opcode=checkPatientQueue&pId=patient001&name=\"\"",
+			"queryParams": [
+				{
+					"key": "opcode",
+					"value": "checkPatientQueue",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pId",
+					"value": "patient001",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "\"\"",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1497160510503,
+			"name": "localhost:8080/iQueue/checkPatientQueue?opcode=checkPatientQueue&pId=pre5437&name=\"\"",
 			"description": "",
 			"collectionId": "3e9ba9f2-7b23-9305-3b0a-250c020c80a8",
 			"responses": []

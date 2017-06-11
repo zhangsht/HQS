@@ -6,10 +6,12 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.iQueue.model.DoctorInfo;
+import com.iQueue.model.Office;
 import com.iQueue.service.DataSourceUtills;
 
 public class DoctorDao implements DoctorDaoImp {
@@ -34,14 +36,6 @@ public class DoctorDao implements DoctorDaoImp {
 			doctorInfo.setPreTreatId(rs.getString("preTreatId"));
 			doctorInfo.setInTreatId(rs.getString("inTreatId"));
 			doctorInfo.setAfterTreatId(rs.getString("afterTreatId"));
-			return doctorInfo;
-		}
-	}
-	
-	private static final class NameInfoMapper implements RowMapper<DoctorInfo> {
-		public DoctorInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
-			DoctorInfo doctorInfo = new DoctorInfo();
-			doctorInfo.setName(rs.getString("name"));
 			return doctorInfo;
 		}
 	}
@@ -76,6 +70,15 @@ public class DoctorDao implements DoctorDaoImp {
 		List<DoctorInfo> items2 = jdbcTemplate.query(SQL2, new Object[] { qId }, new DoctorInfoMapper());
 		if (items2 != null && items.size() > 0) {
 			return "doctorName: " + items2.get(0).getName() + " 队列: " + "完诊队列";
+		}
+		return "null";
+	}
+
+	public String getEndtime(String clinicId) {
+		String SQL = "select * from doctorinfo where cId = ?";
+		List<DoctorInfo> items = jdbcTemplate.query(SQL, new Object[] { clinicId }, new DoctorInfoMapper());
+		if (items != null && items.size() > 0) {
+			return items.get(0).getEndTime();
 		}
 		return "null";
 	}
