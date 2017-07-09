@@ -23,7 +23,8 @@ public class PatientController {
 			if (opcode.equals("change")) {
 				PatientDao patientDao = new PatientDao();
 				String newQueueId = request.getParameter("newQueueId");
-				String name = request.getParameter("name");
+				System.out.println("newQueueId"+ newQueueId);
+				String name = request.getParameter("pId");
 				patientDao.changeQueue(newQueueId, name);
 				modelMap.put("status", "success");
 			} else {

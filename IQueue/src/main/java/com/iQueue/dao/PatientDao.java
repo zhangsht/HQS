@@ -32,6 +32,7 @@ public class PatientDao implements PatientDaoImp {
 	private static final class QueueMapper implements RowMapper<PatientInfo> {
 		public PatientInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			PatientInfo patientInfo = new PatientInfo();
+			patientInfo.setpId(rs.getString("pId"));
 			patientInfo.setName(rs.getString("name"));
 			patientInfo.setArriveTime(rs.getString("arriveTime"));
 			return patientInfo;
@@ -47,7 +48,7 @@ public class PatientDao implements PatientDaoImp {
 	}
 
 	public List<PatientInfo> getQueues(String queueId) {
-		String SQL = "select name, arriveTime from patientInfo where qId = ? order by arriveTime desc limit 2";
+		String SQL = "select pId, name, arriveTime from patientInfo where qId = ? order by arriveTime desc limit 10";
 		List<PatientInfo> items = jdbcTemplate.query(SQL, new Object[] { queueId }, new QueueMapper());
 		return items;
 	}
@@ -84,7 +85,7 @@ public class PatientDao implements PatientDaoImp {
 	}
 
 	public void changeQueue(String newQueueId, String name) {
-		String sql = "update patientInfo set qId=? where name=?";
+		String sql = "update patientInfo set qId=? where pId=?";
 		jdbcTemplate.update(sql, newQueueId, name);
 	}
 
